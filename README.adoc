@@ -1,0 +1,45 @@
+= OpenShift Recipes
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Collection of OpenShift recipes to manage common/infrastructure workload
+
+.Article properties
+|===
+| Category | OpenShift
+| Status | In Progress
+| Tags | Cloud, OpenShift, Installation, Day-1
+|===
+
+toc::[]
+
+== Overview
+
+tbd
+
+== Summary
+
+With the `openshift-installer` is it easy to create and install a new OpenShift cluster. Further solutions using terraform also exists but covers more complex target scenarios.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.
