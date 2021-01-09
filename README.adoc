@@ -7,22 +7,24 @@
 
 Collection of OpenShift recipes to manage common/infrastructure workload
 
-.Article properties
-|===
-| Category | OpenShift
-| Status | In Progress
-| Tags | Cloud, OpenShift, Installation, Day-1
-|===
-
 toc::[]
 
 == Overview
 
-tbd
+This collections holds various recipes to manage (infrastructure) workload like different Operators for Pipeline, ArgoCD, SealedSecrets etc. All recipes use the same structure
+
+* *00_pre*: directory contains resources for the preparation phase
+* *01_work*: directory for the main resources
+* *02_post*: directory for post phase resource
+
+It is not mandatory to use all directories.
+Every recipe should also provide an `install.sh` and `remove.sh`, but can refer to the basic link:install.sh[] / link:remove.sh[].
+
+Currently general yaml resource and kustomize yaml files are supported.
 
 == Summary
 
-With the `openshift-installer` is it easy to create and install a new OpenShift cluster. Further solutions using terraform also exists but covers more complex target scenarios.
+Recipes collection to avoid further manual steps and get always the same outcome.
 
 == References
 
