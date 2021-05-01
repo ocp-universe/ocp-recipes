@@ -24,7 +24,7 @@ argocd:
       #server: 
       project: argocd-bootstrap-project
       # optional possibility to ignore differences
-      ignore:
+      ignores:
       - group: apicur.io
         kind: Apicurito
         jsonPointers:

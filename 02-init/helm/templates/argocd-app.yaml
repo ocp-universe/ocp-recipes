@@ -21,6 +21,11 @@ spec:
     automated:
       prune: {{ .prune | default true }}
       selfHeal: {{ .selfHeal | default true }}
+  
+  {{- with .ignores }}
+  ignoreDifferences:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 ---
 {{- end }}
 {{- end }}
