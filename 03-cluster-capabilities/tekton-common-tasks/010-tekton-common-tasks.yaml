@@ -28,7 +28,7 @@ spec:
 ---
 # Enhance/Fix the s2i-nodejs
 # command enhanced with --storage-driver=vfs
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   annotations:
