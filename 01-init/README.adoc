@@ -1,27 +1,32 @@
-= OpenShift Recipes: Cluster Config
+= OpenShift Recipes: Init
 :author: Hafid Haddouti
 :toc: macro
 :toclevels: 4
 :sectlinks:
 :sectanchors:
 
-Kubernetes/OpenShift GitOps - Manage the capabilities or your cluster. The cluster configuration.
+Kubernetes/OpenShift GitOps - Manage the capabilities or your cluster. The Initialization.
 
 toc::[]
 
 == Overview
 
-This section contains the Cluster Configuration part to configure ArgoCD with the desired cluster capabilities.
-The installation and configuration is solved with `helm` and the link:helm/values.yaml[] contains the configuration for the desired capabilities.
+This section contains the initialization part.
 
 == Installation
 
-Generally this is not installed manually. During the link:../01-init[initialization] will be a new ArgoCD App configured and linked to this repo.
+Install as follow
+
+----
+$ git clone https://github.com/ocp-universe/ocp-recipes
+$ cd 01-init
+$ oc apply -k kustomize
+----
 
 
 == Summary
 
-The cluster configuration represents the state of the cluster.
+This is the foundation for the GitOps solution to manage a Kubernetes/OpenShift cluster.
 
 == References
 
