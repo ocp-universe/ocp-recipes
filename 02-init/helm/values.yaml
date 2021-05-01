@@ -10,9 +10,11 @@ argocd:
       path: 03-cluster-config/sealedsecret
       revision: main
       namespace: openshift-gitops
-      # optional
+      # optional fields
       #server: 
       project: argocd-bootstrap-project
+      #prune: true/false
+      #selfHeal: true/false
     - name: apicurito
       repo: https://github.com/ocp-universe/ocp-recipes
       path: 03-cluster-config/apicurito
