@@ -20,7 +20,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-bootstrap-config
+  name: 00-argocd-bootstrap-config
   namespace: openshift-gitops
 spec:
   destination:
