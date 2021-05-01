@@ -40,6 +40,8 @@ kind: Apicurito
 metadata:
   name: apicurito-service
   namespace: apicurito
+  labels:
+    app.kubernetes.io/instance: apicurito
 spec:
   size: 1
   image: 'apicurio/apicurito-ui:latest'
