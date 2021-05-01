@@ -23,3 +23,11 @@ argocd:
       # optional
       #server: 
       project: argocd-bootstrap-project
+    - name: tekton-common-manifest
+      repo: https://github.com/ocp-universe/ocp-recipes
+      path: 03-cluster-config/tekton-common-tasks
+      revision: main
+      namespace: openshift-gitops
+      # optional
+      #server: 
+      project: argocd-bootstrap-project
