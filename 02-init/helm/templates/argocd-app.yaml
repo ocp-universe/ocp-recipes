@@ -1,0 +1,21 @@
+# Generic definition to create various ArgoCD Applications using the config
+{{- if .Values.argocd.create -}}
+{{- range .Values.argocd.apps }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .name | quote }}
+  namespace: {{ .namespace | quote }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ .namespace | quote }}
+    server: {{ .server | default "https://kubernetes.default.svc" }}
+  project: {{ .project | quote }}
+  source:
+    path: {{ .path | quote }}
+    repoURL: {{ .repo | quote }}
+    targetRevision: {{ .revision | quote }}
+{{- end }}
+{{- end }}

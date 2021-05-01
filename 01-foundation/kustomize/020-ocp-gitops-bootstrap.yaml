@@ -1,0 +1,37 @@
+---
+# Logical group for applications
+# the config is very generic
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd-bootstrap-project
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    # List all namespaces which ArgoCD should watch within this project
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-bootstrap-config
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: 'https://kubernetes.default.svc'
+  project: argocd-bootstrap-project
+  source:
+    repoURL: https://github.com/ocp-universe/ocp-recipes.git
+    targetRevision: main
+    path: 02-init/helm
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,23 @@
+# Helm values for: ArgoCD Cluster Config using app-of-apps pattern
+
+argocd:
+  # Specifies whether a ArgoCD app createion is wanted or not
+  create: true
+
+  apps:
+    - name: sealedsecret
+      repo: https://github.com/ocp-universe/ocp-recipes
+      path: 03-cluster-config/sealedsecret
+      revision: main
+      namespace: openshift-gitops
+      # optional
+      #server: 
+      project: argocd-bootstrap-project
+    - name: apicurito
+      repo: https://github.com/ocp-universe/ocp-recipes
+      path: 03-cluster-config/apicurito
+      revision: main
+      namespace: openshift-gitops
+      # optional
+      #server: 
+      project: argocd-bootstrap-project

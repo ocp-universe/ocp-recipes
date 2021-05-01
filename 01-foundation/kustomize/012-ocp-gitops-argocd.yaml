@@ -1,0 +1,65 @@
+# ArgoCD configuration
+#
+# - Enable Server Route
+# - Enable OAuth
+# - Enable Status Badge
+# - Enable Grafana with Route
+# - Enable Prometheus with Route
+# - Register repos and credentials
+# - Enhance health check for Ingress
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd-custom
+  labels:
+    workspace: demo
+spec:
+  statusBadgeEnabled: true
+  server:
+    route:
+      enabled: true
+  dex:
+    image: quay.io/redhat-cop/dex
+    openShiftOAuth: true
+    version: v2.22.0-openshift
+  rbac:
+    defaultPolicy: 'role:readonly'
+    policy: |
+      g, system:cluster-admins, role:admin
+    scopes: '[groups]'
+  grafana:
+    enabled: false
+    image: grafana/grafana
+    ingress:
+      enabled: false
+    resources: {}
+    route: 
+      enabled: true
+    size: 1
+    version: 6.7.1
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route: 
+      enabled: true
+    size: 1
+#  repositoryCredentials: '*'
+  # Enhance health check for Ingress and PVC
+  resourceCustomizations: |
+    extensions/Ingress:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+    networking.k8s.io/Ingress:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+    PersistentVolumeClaim:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs

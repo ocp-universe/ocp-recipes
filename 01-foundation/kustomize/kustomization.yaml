@@ -1,0 +1,17 @@
+# Kustomize: Prepare the foundation of the OCP cross-cutting management
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+#namespace: openshift-gitops
+#commonLabels:
+#  pipeline: tekton101
+#  deploy: argocd
+
+
+resources:
+- 000-common.yaml
+- 010-ocp-gitops-operator.yaml
+#- 011-ocp-gitops-service.yaml
+#- 012-ocp-gitops-argocd.yaml
+#- 020-ocp-gitops.yaml

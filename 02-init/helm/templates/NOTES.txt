@@ -1,0 +1,4 @@
+# #######################
+# OpenShift GitOps: Cluster Config Bootstrap done
+# Check the ArgoCD UI
+# #######################

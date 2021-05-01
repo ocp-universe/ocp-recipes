@@ -1,0 +1,7 @@
+# GitOpsService configures a web service for rendering the GitOps UI on OpenShift
+apiVersion: pipelines.openshift.io/v1alpha1
+kind: GitopsService
+metadata:
+  name: gitopsservice
+  namespace: openshift-operators
+spec: {}
