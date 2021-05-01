@@ -1,0 +1,14 @@
+# Kustomize: GitLab Runner
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+#namespace: openshift-gitops
+#commonLabels:
+#  pipeline: tekton101
+#  deploy: argocd
+
+
+resources:
+- 010-gitlab-runner-operator.yaml
+- 020-gitlab-runner-registration.yaml

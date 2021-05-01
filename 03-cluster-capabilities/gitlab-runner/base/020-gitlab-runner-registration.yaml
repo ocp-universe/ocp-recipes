@@ -1,0 +1,23 @@
+# GitLab Runner registration
+#
+# Relevant parameters
+# - gitlabUrl: to your GitLab instance
+# - token: name of the secret with the registration token
+# - tags: tags to identify the GitLab runner instance
+# - env: reference to config map with env variables
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-runner-custom-config
+data:
+  KUBERNETES_PRIVILEGED: "true"
+---
+apiVersion: apps.gitlab.com/v1beta2
+kind: Runner
+metadata:
+ name: gitlab-runner
+spec:
+ env: gitlab-runner-custom-config
+# buildImage: 'registry.connect.redhat.com/gitlab/gitlab-runner:v13.9.0-8'
+# helperImage: 'registry.connect.redhat.com/gitlab/gitlab-runner-helper:v13.9.0-8'

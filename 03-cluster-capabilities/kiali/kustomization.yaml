@@ -1,0 +1,14 @@
+# Kustomize: Operator
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+#namespace: openshift-gitops
+#commonLabels:
+#  pipeline: tekton101
+#  deploy: argocd
+
+
+resources:
+- 010-operator.yaml
+- 020-instances.yaml

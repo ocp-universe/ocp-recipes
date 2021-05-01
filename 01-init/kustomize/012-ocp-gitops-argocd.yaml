@@ -12,19 +12,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
   name: argocd-custom
+  namespace: openshift-gitops
   labels:
     workspace: demo
 spec:
+  controller:
+    # Change app-resync, default is 3min
+    appSync: 1m
   statusBadgeEnabled: true
   server:
     route:
       enabled: true
-  dex:
-    image: quay.io/redhat-cop/dex
-    openShiftOAuth: true
-    version: v2.22.0-openshift
+#  dex:
+#    image: quay.io/redhat-cop/dex
+#    openShiftOAuth: true
+#    version: v2.22.0-openshift
   rbac:
-    defaultPolicy: 'role:readonly'
+    #defaultPolicy: 'role:readonly'
     policy: |
       g, system:cluster-admins, role:admin
     scopes: '[groups]'
@@ -45,6 +49,14 @@ spec:
     route: 
       enabled: true
     size: 1
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
 #  repositoryCredentials: '*'
   # Enhance health check for Ingress and PVC
   resourceCustomizations: |

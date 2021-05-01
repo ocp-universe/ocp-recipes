@@ -1,35 +1,36 @@
-# SealedSecret Operator (Helm)
-# https://github.com/disposab1e/sealed-secrets-operator-helm
+# GitLab Runner Operator installation
 #
-# Version: v0.0.2, channel: alpha 
+# gitlab-runner-operator
+# Version: v13.10.0, channel: stable
+#
+# - Operator subscription
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cicd
+  name: gitlab-config
   labels:
     openshift.io/cluster-monitoring: "true"
 ---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  name: sealed-secrets-operator-helm
-  namespace: cicd
+  name: gitlab-config
+  namespace: gitlab-config
 spec:
   targetNamespaces:
-  - cicd
+  - gitlab-config
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   generation: 1  
-  name: sealed-secrets-operator-helm
-  namespace: cicd
+  name: gitlab-runner-operator
+  namespace: gitlab-config
 spec:
-  channel: alpha
+  channel: stable
   installPlanApproval: Automatic
-  name: sealed-secrets-operator-helm
+  name: gitlab-runner-operator
   source: community-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: sealed-secrets-operator-helm.v0.0.2
----
+  startingCSV: gitlab-runner-operator.v13.10.0

@@ -1,0 +1,15 @@
+# GitLab Runner registration - Patch
+# 
+# Relevant parameters
+# - gitlabUrl: to your GitLab instance
+# - token: name of the secret with the registration token
+# - tags: tags to identify the GitLab runner instance
+---
+apiVersion: apps.gitlab.com/v1beta2
+kind: Runner
+metadata:
+ name: gitlab-runner-nonprod
+spec:
+ gitlabUrl: https://gitlab-ee.coc-ibm.com
+ token: runner-token-secret
+ tags: 'openshift, nonprod'

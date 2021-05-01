@@ -1,0 +1,23 @@
+# Red Hat Service Mesh Operator
+# 
+# servicemeshoperator
+# Version: 2.0.3, channel: stable
+#
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  generation: 1  
+  name: servicemeshoperator
+  namespace: openshift-operators
+  labels:
+    operators.coreos.com/elasticsearch-operator.openshift-operators-redhat: ""
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: servicemeshoperator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: servicemeshoperator.v2.0.3
+---
+
