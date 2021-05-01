@@ -17,5 +17,6 @@ spec:
     path: {{ .path | quote }}
     repoURL: {{ .repo | quote }}
     targetRevision: {{ .revision | quote }}
+---
 {{- end }}
 {{- end }}

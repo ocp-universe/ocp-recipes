@@ -36,9 +36,9 @@ spec:
   startingCSV: apicuritooperator.v0.1.0
 ---
 apiVersion: apicur.io/v1alpha1
-  kind: Apicurito
-  metadata:
-    name: apicurito-service
-  spec:
-    size: 1
-    image: apicurio/apicurito-ui:1.2.4
+kind: Apicurito
+metadata:
+  name: apicurito-service
+spec:
+  size: 1
+  image: 'apicurio/apicurito-ui:1.2.4'
