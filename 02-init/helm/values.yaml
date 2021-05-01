@@ -14,7 +14,7 @@ argocd:
       #server: 
       project: argocd-bootstrap-project
       #prune: true/false
-      #selfHeal: true/false
+      #selfHeal: true/false      
     - name: apicurito
       repo: https://github.com/ocp-universe/ocp-recipes
       path: 03-cluster-config/apicurito
@@ -23,6 +23,12 @@ argocd:
       # optional
       #server: 
       project: argocd-bootstrap-project
+      # optional possibility to ignore differences
+      ignore:
+      - group: apicur.io
+        kind: Apicurito
+        jsonPointers:
+        - /metadata/labels
     - name: tekton-common-manifest
       repo: https://github.com/ocp-universe/ocp-recipes
       path: 03-cluster-config/tekton-common-tasks
