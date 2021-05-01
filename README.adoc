@@ -17,8 +17,8 @@ For the realization of the GitOps principles basically ArgoCD is used. In the cu
 The idea of the solution to manage a Kubernetes/OpenShift cluster in the GitOps way has the following pillars
 
 * link:01-init[Init]: which installs the minium tools to support GitOps, here ArgoCD using the `Red Hat OpenShift GitOps`
-* link:02-bootstrap[Bootstrap]: The ArgoCD project and app which will manage the cluster and maintain the capabilities. Here is the list of wanted capabilities defined
-* link:03-cluster-configs[Cluster Configs]: All the possible (cross-cutting) capabilities
+* link:02-cluster-config[Cluster Config]: The ArgoCD project and app which will manage the cluster and maintain the capabilities. Here is the list of wanted capabilities defined - the descriptive state of your cluster.
+* link:03-cluster-capabilities[Cluster Capabilities]: All the possible (cross-cutting) capabilities
 
 == Installation
 
