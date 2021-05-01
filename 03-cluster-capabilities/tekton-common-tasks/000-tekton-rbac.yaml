@@ -15,7 +15,7 @@ rules:
   verbs: ["get", "list", "watch"]
 # Permissions to create resources in associated Tasks
 - apiGroups: ["tekton.dev"]
-  resources: ["task", "pipeline", "pipelineresources", "task"]
+  resources: ["tasks", "task", "pipelines", "pipelineresources"]
   verbs: ["create"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
