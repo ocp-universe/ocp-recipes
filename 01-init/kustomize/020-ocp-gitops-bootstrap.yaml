@@ -30,7 +30,7 @@ spec:
   source:
     repoURL: https://github.com/ocp-universe/ocp-recipes.git
     targetRevision: main
-    path: 02-init/helm
+    path: 02-cluster-config/helm
   syncPolicy:
     automated:
       prune: true

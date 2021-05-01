@@ -7,7 +7,7 @@ argocd:
   apps:
     - name: sealedsecret
       repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-config/sealedsecret
+      path: 03-cluster-capabilities/sealedsecret
       revision: main
       namespace: openshift-gitops
       # optional fields
@@ -17,7 +17,7 @@ argocd:
       #selfHeal: true/false      
     - name: apicurito
       repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-config/apicurito
+      path: 03-cluster-capabilities/apicurito
       revision: main
       namespace: openshift-gitops
       # optional
@@ -31,7 +31,7 @@ argocd:
         - /metadata/labels
     - name: tekton-common-manifest
       repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-config/tekton-common-tasks
+      path: 03-cluster-capabilities/tekton-common-tasks
       revision: main
       namespace: openshift-gitops
       # optional

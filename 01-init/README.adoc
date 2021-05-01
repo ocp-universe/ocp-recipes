@@ -19,8 +19,10 @@ Install as follow
 
 ----
 $ git clone https://github.com/ocp-universe/ocp-recipes
-$ cd 01-init
-$ oc apply -k kustomize
+$ oc apply -k 01-init/kustomize
+appproject.argoproj.io/argocd-bootstrap-project created
+application.argoproj.io/00-argocd-bootstrap-config created
+subscription.operators.coreos.com/openshift-gitops-operator created
 ----
 
 
