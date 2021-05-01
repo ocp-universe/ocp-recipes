@@ -11,6 +11,20 @@ toc::[]
 
 == Overview
 
+Using GitOps to manage a Kubernetes/OpenShift cluster with the cross-cutting capabilities like Pipeline, Secret Management or similar.
+For the realization of the GitOps principles basically ArgoCD is used. In the current state the link:https://docs.openshift.com/container-platform/4.7/cicd/gitops/gitops-release-notes.html[OpenShift GitOps] option is used, which integrates ArgoCD and Pipeline.
+
+The idea of the solution to manage a Kubernetes/OpenShift cluster in the GitOps way has the following pillars
+
+* link:01-init[Init]: which installs the minium tools to support GitOps, here ArgoCD using the `Red Hat OpenShift GitOps`
+* link:02-bootstrap[Bootstrap]: The ArgoCD project and app which will manage the cluster and maintain the capabilities. Here is the list of wanted capabilities defined
+* link:03-cluster-configs[Cluster Configs]: All the possible (cross-cutting) capabilities
+
+== Installation
+
+
+== Overview
+
 This collections holds various recipes to manage (infrastructure) workload like different Operators for Pipeline, ArgoCD, SealedSecrets etc. All recipes use the same structure
 
 * *00_pre*: directory contains resources for the preparation phase
