@@ -8,6 +8,7 @@ metadata:
   name: web-termina-task-run2
 spec:
   taskRef:
+    kind: ClusterTask
     name: ansible-runner-with-clone
   params:
     # ansible-runner parameters
