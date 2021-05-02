@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: ocp-recipe-open-data-hub
+  author: Hafid Haddouti
+  description: |
+    Set up Open Data Hub
+  license: MIT
+  min_ansible_version: 2.8
+  platforms: []
+  galaxy_tags:
+  - ocp
+  - openshift
+  - data
+dependencies: []
+

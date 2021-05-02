@@ -1,0 +1,6 @@
+# main Ansible playbook includes the role
+---
+- hosts: localhost
+  connection: local
+  roles:
+  - role: 'role/'

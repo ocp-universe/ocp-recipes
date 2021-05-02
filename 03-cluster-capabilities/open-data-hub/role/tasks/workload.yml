@@ -1,0 +1,98 @@
+---
+# Implement your Workload deployment tasks here
+
+- name: Setting up workload for user
+  debug:
+    msg: "Setting up workload for user ocp_username = {{ ocp_username }}"
+
+- name: Set up ocp_recipe_opendatahub combined dictionary
+  set_fact:
+    ocp_recipe_opendatahub: >-
+      {{ ocp_recipe_opendatahub_defaults
+       | combine(ocp_recipe_opendatahub_vars    | default( {} ),
+                 ocp_recipe_opendatahub_secrets | default( {}), recursive=true )
+      }}
+      
+- name: Print combined role variables
+  debug:
+    var: ocp_recipe_opendatahub
+    verbosity: 2
+
+
+- name: Prepare Open Data Hub configuration
+  block:
+  - name: Create all config and instance
+    k8s:
+      state: present
+      definition: "{{ lookup('file', item ) | from_yaml }}"
+    loop:
+    - ./files/namespace.yaml
+    - ./files/operatorgroup.yaml
+
+- name: Create Open Data Hub subscription
+  k8s:
+    state: present
+    definition: "{{ lookup('template', './templates/subscription.j2' ) }}"
+
+- name: Wait until InstallPlan is created
+  k8s_facts:
+    api_version: operators.coreos.com/v1alpha1
+    kind: InstallPlan
+    namespace: "{{ ocp_recipe_opendatahub.target_namespace }}"
+  register: r_install_plan
+  retries: 30
+  delay: 5
+  until:
+  #- r_install_plan | selectattr('spec.clusterServiceVersionNames', 'contains', 'opendatahub')
+  - r_install_plan.resources | to_json | from_json | json_query(query)
+  vars:
+    query: >-
+      [?starts_with(spec.clusterServiceVersionNames[0], 'opendatahub')].metadata.name|[0]
+
+# Block: For manual approval
+- name: Manually approve InstallPlan
+  when: not ocp_recipe_opendatahub.automatic_install_plan_approval
+  block:
+  - name: Set InstallPlan Name
+    set_fact:
+      ocp_recipe_opendatahub_install_plan_name: "{{ r_install_plan.resources | to_json | from_json | json_query(query) }}"
+    vars:
+      query: >-
+        [?starts_with(spec.clusterServiceVersionNames[0], 'opendatahub')].metadata.name|[0]
+
+  - name: Approve InstallPlan
+    k8s:
+      state: present
+      definition: "{{ lookup( 'template', './templates/installplan.j2' ) }}"
+
+- name: Find all related CSVs
+  set_fact:
+    ocp_recipe_opendatahub_csvs:  "{{ r_install_plan.resources | to_json | from_json | json_query(query) }}"
+  vars:
+    query: >-
+      [?starts_with(spec.clusterServiceVersionNames[0], 'opendatahub')].spec.clusterServiceVersionNames
+  
+- name: Wait until all CSVs are Succeeded
+  k8s_facts:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    name: "{{ item }}"
+    namespace: "{{ ocp_recipe_opendatahub.target_namespace }}"
+  register: r_csv
+  retries: 15
+  delay: 5
+  until:
+  - r_csv.resources[0].status.phase is defined
+  - r_csv.resources[0].status.phase | length > 0
+  - r_csv.resources[0].status.phase == "Succeeded"
+  loop: "{{ ocp_recipe_opendatahub_csvs[0] }}"
+
+
+
+
+
+# Leave this as the last task in the playbook.
+- name: workload tasks complete
+  debug:
+    msg: "Workload Tasks completed successfully."
+  when: not silent|bool

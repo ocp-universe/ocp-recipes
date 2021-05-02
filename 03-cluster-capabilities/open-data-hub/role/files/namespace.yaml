@@ -1,0 +1,6 @@
+# Namespace: Open Data Hub
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+ name: odh

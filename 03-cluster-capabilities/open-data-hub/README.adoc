@@ -1,0 +1,63 @@
+= OpenShift Recipes: Open Data Hub
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Open Data Hub, with Ansible
+
+toc::[]
+
+== Overview
+
+Deploys link:https://opendatahub.io/[Open Data Hub] into a Kubernetes/OpenShift cluster using Ansible
+
+NOTE: Attention, currently does the installation not work due conflicts with other operators, see link:https://github.com/opendatahub-io/opendatahub-operator/issues/128[issue]
+
+== Action
+
+To manually install/remove use the `ansible-playbook`, otherwise the intention is to use `Tekton` with `ansible-runner` to execute this playbook and role.
+Verify the configuration in link:role/defaults/main.yml[].
+
+
+=== Deploy
+
+----
+ansible-playbook -i localhost ./main.yml \
+    -e"silent=False" \
+    -e"ACTION=create"
+----
+
+
+=== Remove
+
+----
+ansible-playbook -i localhost ./main.yml \
+    -e"silent=False" \
+    -e"ACTION=remove"
+----
+
+== Summary
+
+Open Data Hub installed.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.
