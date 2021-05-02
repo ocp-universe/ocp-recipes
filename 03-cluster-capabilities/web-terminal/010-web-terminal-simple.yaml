@@ -12,11 +12,17 @@ spec:
   params:
     # ansible-runner parameters
     - name: project-dir
-      value: '.'
+      value: '03-cluster-capabilities/web-terminal'
     - name: args
       value:
       - '-p main.yml'
+      - '--project-dir 03-cluster-capabilities/web-terminal'
+      #- '--project-dir "web-terminal"'
+    - name: largs
+      value: '-p main.yml --project-dir 03-cluster-capabilities/web-terminal'            
   workspaces:
     - name: runner-dir
       emptyDir: {}
-  
+  podTemplate:
+    securityContext:
+      runAsUser: 0
