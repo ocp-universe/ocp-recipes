@@ -1,0 +1,36 @@
+# Web-Terminal
+#
+# Using Tekton and ansible-runner
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: web-termina-task-run2
+  namespace: {{ .Values.namespace | quote }}
+spec:
+  taskRef:
+    name: ansible-runner-with-clone
+  params:
+    # ansible-runner parameters
+    - name: project-dir
+      value: '03-cluster-capabilities/web-terminal'
+    - name: args
+      value:
+      - '-p main.yml'
+      - '--project-dir 03-cluster-capabilities/web-terminal'
+      #- '--project-dir "web-terminal"'
+    - name: largs
+      value: '-p main.yml --project-dir 03-cluster-capabilities/web-terminal'     
+    # git-clone parameters
+    - name: url
+      value: "https://github.com/ocp-universe/ocp-recipes"
+    - name: revision
+      value: "main"
+    - name: sslVerify
+      value: "false"       
+  workspaces:
+    - name: runner-dir
+      emptyDir: {}
+  podTemplate:
+    securityContext:
+      runAsUser: 0

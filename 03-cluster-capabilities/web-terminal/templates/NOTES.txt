@@ -1,0 +1,4 @@
+# #######################
+# OpenShift GitOps: Web-Terminal done
+# Check the ArgoCD UI
+# #######################
