@@ -12,14 +12,18 @@ rules:
 - apiGroups: ["triggers.tekton.dev"]
   resources: ["eventlisteners", "triggerbindings", "triggertemplates", "triggers"]
   verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-# configmaps is needed for updating logging config
-  resources: ["configmaps"]
-  verbs: ["get", "list", "watch"]
 # Permissions to create resources in associated Tasks
 - apiGroups: ["tekton.dev"]
   resources: ["tasks", "task", "taskruns", "pipelines", "pipelineresources"]
   verbs: ["create", "update", "patch", "delete"]
+- apiGroups: [""]
+# configmaps is needed for updating logging config
+  resources: ["configmaps"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+# serviceaccounts, to create later a service account
+  resources: ["serviceaccounts"]
+  verbs: ["create", "update", "patch", "delete", "get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
