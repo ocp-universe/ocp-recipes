@@ -1,0 +1,19 @@
+# Web-Terminal
+#
+# Using Tekton and ansible-runner
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: web-termina-trun-
+spec:
+  taskRef:
+    name: ansible-runner
+  params:
+    # ansible-runner parameters
+    - name: project-dir
+      value: '.'
+    - name: args
+      value:
+      - '-p main.yml'
+  
