@@ -1,0 +1,5 @@
+# Helm values for: Tekton tasks
+
+namespaces:
+- openshift-gitops
+- gitops-config

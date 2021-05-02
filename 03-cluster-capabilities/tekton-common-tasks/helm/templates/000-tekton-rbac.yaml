@@ -2,11 +2,13 @@
 # 
 # - Allow ArgoCD to modify Tekton CRDs
 # - Allow pipeline to exec
+{{- range .Values.namespaces }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: tekton-role
+  namespace: {{ . | quote }}
 rules:
 # EventListeners need to be able to fetch all namespaced resources
 - apiGroups: ["triggers.tekton.dev"]
@@ -29,7 +31,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: tekton-role-binding
-  namespace: openshift-gitops
+  namespace: {{ . | quote }}
 subjects:
 - kind: ServiceAccount
   name: argocd-cluster-argocd-application-controller
@@ -38,6 +40,8 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: tekton-role
+{{- end }}
+
 ---
 apiVersion: v1
 kind: ServiceAccount
