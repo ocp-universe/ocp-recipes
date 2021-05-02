@@ -31,7 +31,7 @@ argocd:
         - /metadata/labels
     - name: tekton-common-manifest
       repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/tekton-common-tasks
+      path: 03-cluster-capabilities/tekton-common-tasks/helm
       revision: main
       namespace: openshift-gitops
       # optional
