@@ -8,20 +8,15 @@ metadata:
   name: web-termina-task-run2
 spec:
   taskRef:
-    name: ansible-runner-with-clone
+    name: ansible-runner
   params:
     # ansible-runner parameters
     - name: project-dir
-      value: '03-cluster-capabilities/web-terminal'
+      value: '.'
     - name: args
       value:
       - '-p main.yml'
-    - name: url
-      value: "https://github.com/ocp-universe/ocp-recipes"
-    - name: revision
-      value: "main"
-    - name: sslVerify
-      value: "false"       
   workspaces:
     - name: runner-dir
       emptyDir: {}
+  
