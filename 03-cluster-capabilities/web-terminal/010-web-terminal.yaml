@@ -16,4 +16,7 @@ spec:
     - name: args
       value:
       - '-p main.yml'
+  workspaces:
+    - name: runner-dir
+      emptyDir: {}
   
