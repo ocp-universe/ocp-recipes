@@ -1,0 +1,71 @@
+= OpenShift Recipes: Web-Terminal
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Web-Terminal, with Ansible
+
+toc::[]
+
+== Overview
+
+Deploys link:https://github.com/redhat-developer/web-terminal-operator/[Web Terminal] into a Kubernetes/OpenShift cluster using Ansible.
+
+== Action
+
+To manually install/remove use the `ansible-playbook`, otherwise the intention is to use `Tekton` with `ansible-runner` to execute this playbook and role.
+Verify the configuration in link:role/defaults/main.yml[].
+
+
+=== Deploy
+
+----
+ansible-playbook -i localhost ./main.yml \
+    -e"silent=False" \
+    -e"ACTION=create"
+----
+
+
+=== Remove
+
+----
+ansible-playbook -i localhost ./main.yml \
+    -e"silent=False" \
+    -e"ACTION=remove"
+----
+
+== Verification
+
+After installation open in the OpenShift UI the terminal from the top menu bar. After selection of a project the terminal is available and provides all kubectl/oc commands
+
+.Try out the command
+----
+$ oc new-app https://github.com/openshift/ruby-hello-world.git#beta4
+
+----
+
+== Summary
+
+Open Data Hub installed.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

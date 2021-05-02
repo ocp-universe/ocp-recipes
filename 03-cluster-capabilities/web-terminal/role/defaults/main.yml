@@ -1,0 +1,35 @@
+---
+become_override: False
+ocp_username: opentlc-mgr
+silent: False
+
+ocp_recipe_operator_defaults:
+  # Operator Name
+  operator_name: "web-terminal"
+  # ...source
+  operator_source: "redhat-operators"
+  # ...namespace of the source
+  operator_source_namespace: "openshift-marketplace"  
+  # The channel to subscribe to
+  channel: "alpha"
+
+  # Starting CSV. When empty use latest in the channel
+  starting_csv: "v1.1.0"
+  # starting_csv: "v1.0.9"
+
+  # Target namespace of the installed operator
+  target_namespace: "openshift-operators"
+  
+  # When specifying a dedicated CSV set this to false to prevent
+  # unwanted upgrades of the installed version
+  automatic_install_plan_approval: true
+
+  # Deploy an instance of the operator
+  # When set to false only deploy the operator and its dependencies
+  deploy_instance: true
+
+  # List of projects to add to the member roll
+  # of the created Service Mesh Control Plane
+  #member_roll_projects: []
+  # member_roll_projects:
+  # - bookinfo
