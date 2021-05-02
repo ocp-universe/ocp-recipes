@@ -1,3 +1,3 @@
 # Helm values for: Web-Terminal with Ansible
 
-namespace: openshift-gitops
+namespace: gitops-config
