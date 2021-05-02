@@ -21,7 +21,7 @@ To support tracing is it mandatory to inject the Jaeger agent sidecare, e.g. aut
 
 == Summary
 
-Jaeger installated.
+Jaeger installed.
 
 == References
 

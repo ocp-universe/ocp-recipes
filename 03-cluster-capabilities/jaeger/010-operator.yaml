@@ -9,9 +9,7 @@ kind: Subscription
 metadata:
   generation: 1  
   name: jaeger-product
-  namespace: openshift-operators 
-  labels:
-    operators.coreos.com/elasticsearch-operator.openshift-operators-redhat: ""
+  namespace: openshift-operators  
 spec:
   channel: stable
   installPlanApproval: Automatic
