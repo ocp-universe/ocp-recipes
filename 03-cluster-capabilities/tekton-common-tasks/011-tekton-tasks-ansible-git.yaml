@@ -5,7 +5,7 @@
 # https://github.com/tektoncd/catalog/blob/main/task/git-clone/0.2/git-clone.yaml
 ---
 apiVersion: tekton.dev/v1beta1
-kind: Task
+kind: ClusterTask
 metadata:
   name: ansible-runner-with-clone
   labels:

@@ -3,7 +3,7 @@
 # v1.4.6
 ---
 apiVersion: tekton.dev/v1beta1
-kind: Task
+kind: ClusterTask
 metadata:
   name: ansible-runner
   labels:
