@@ -12,3 +12,4 @@ kind: Kustomization
 resources:
 - 000-tekton-rbac.yaml
 - 010-tekton-common-tasks.yaml
+- 011-tekton-tasks-ansible.yaml
