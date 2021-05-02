@@ -1,4 +1,7 @@
 # Tekton RBAC
+# 
+# - Allow ArgoCD to modify Tekton CRDs
+# - Allow pipeline to exec
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -30,3 +33,23 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: tekton-role
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: pipeline
+  namespace: openshift-gitops
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: edit
+  namespace: openshift-gitops
+subjects:
+- kind: ServiceAccount
+  name: pipeline
+  namespace: openshift-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
