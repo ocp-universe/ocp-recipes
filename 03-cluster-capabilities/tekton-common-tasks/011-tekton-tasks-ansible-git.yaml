@@ -84,6 +84,15 @@ spec:
       type: array
       default:
         - --help
+    - name: largs
+      description: The arguments to pass ansible-runner
+      type: string
+      default: ""        
+  results:
+    - name: commit
+      description: The precise commit SHA that was fetched by this Task
+    - name: url
+      description: The precise URL that was fetched by this Task
   steps:
     - name: clone
       image: $(params.gitInitImage)
@@ -185,12 +194,28 @@ spec:
         fi
       workingDir: '$(workspaces.runner-dir.path)/$(params.project-dir)'
 
+    - name: debug
+      image: docker.io/ansible/ansible-runner:1.4.6@sha256:bd09ef403f2f90f2c6bd133d7533e939058903f69223c5f12557a49e3aed14bb
+      env:
+      - name: WORKSPACE_OUTPUT_PATH
+        value: $(workspaces.runner-dir.path)
+      script: |
+        #!/bin/sh
+        
+        echo $(params.project-dir)
+        ls -l ${WORKSPACE_OUTPUT_PATH}
+        ls -l ${WORKSPACE_OUTPUT_PATH}/$(params.project-dir)
+
+      workingDir: '$(workspaces.runner-dir.path)'
+
     - name: run-playbook
       image: docker.io/ansible/ansible-runner:1.4.6@sha256:bd09ef403f2f90f2c6bd133d7533e939058903f69223c5f12557a49e3aed14bb
-      command: ['entrypoint']
-      args:
-        - ansible-runner
-        - run
-        - $(params.args)
-        - $(params.project-dir)
+      #command: ['entrypoint']
+      #args:
+      #  - ansible-runner $(params.args) run $(params.project-dir)
+      script: |
+        #!/bin/sh
+
+        entrypoint ansible-runner $(params.largs) run $(params.project-dir)
+
       workingDir: '$(workspaces.runner-dir.path)'

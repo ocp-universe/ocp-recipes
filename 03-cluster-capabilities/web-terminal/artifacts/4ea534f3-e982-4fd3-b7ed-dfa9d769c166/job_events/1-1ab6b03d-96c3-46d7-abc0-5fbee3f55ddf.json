@@ -1,0 +1,1 @@
+{"event": "verbose", "uuid": "1ab6b03d-96c3-46d7-abc0-5fbee3f55ddf", "counter": 1, "stdout": "\u001b[1;35m[WARNING]: Unable to parse /runner/03-cluster-capabilities/web-\u001b[0m", "start_line": 0, "end_line": 1, "runner_ident": "4ea534f3-e982-4fd3-b7ed-dfa9d769c166"}

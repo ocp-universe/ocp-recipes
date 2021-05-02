@@ -46,6 +46,11 @@ $ oc new-app https://github.com/openshift/ruby-hello-world.git#beta4
 
 ----
 
+To try locally the ansible playbook with `ansible-runner`
+----
+docker run --rm -it -v $(pwd):/runner ansible-runner:1.4.6 ansible-runner -p main.yml --project-dir 03-cluster-capabilities/web-terminal run .
+----
+
 == Summary
 
 Open Data Hub installed.

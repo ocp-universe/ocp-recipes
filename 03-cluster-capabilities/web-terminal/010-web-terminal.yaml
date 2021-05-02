@@ -16,6 +16,11 @@ spec:
     - name: args
       value:
       - '-p main.yml'
+      - '--project-dir 03-cluster-capabilities/web-terminal'
+      #- '--project-dir "web-terminal"'
+    - name: largs
+      value: '-p main.yml --project-dir 03-cluster-capabilities/web-terminal'     
+    # git-clone parameters
     - name: url
       value: "https://github.com/ocp-universe/ocp-recipes"
     - name: revision
@@ -25,3 +30,6 @@ spec:
   workspaces:
     - name: runner-dir
       emptyDir: {}
+  podTemplate:
+    securityContext:
+      runAsUser: 0
