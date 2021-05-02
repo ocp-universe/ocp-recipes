@@ -2,5 +2,7 @@
 ---
 - hosts: localhost
   connection: local
+  collections:
+    - community.kubernetes
   roles:
   - role: 'role/'
