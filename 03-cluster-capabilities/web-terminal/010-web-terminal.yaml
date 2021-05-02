@@ -5,7 +5,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  generateName: web-termina-trun-
+  name: web-termina-task-run
 spec:
   taskRef:
     name: ansible-runner
