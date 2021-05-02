@@ -4,7 +4,7 @@
 # - Allow pipeline to exec
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
   name: tekton-role
 rules:
@@ -29,13 +29,28 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: tekton-role-binding
+  namespace: openshift-gitops
 subjects:
 - kind: ServiceAccount
   name: argocd-cluster-argocd-application-controller
   namespace: openshift-gitops
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
+  name: tekton-role
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: tekton-role-binding
+  namespace: gitops-config
+subjects:
+- kind: ServiceAccount
+  name: argocd-cluster-argocd-application-controller
+  namespace: openshift-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
   name: tekton-role
 ---
 apiVersion: v1
