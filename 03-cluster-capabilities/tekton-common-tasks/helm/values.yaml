@@ -1,5 +1,8 @@
 # Helm values for: Tekton tasks
 
+argocd:
+  serviceaccount: openshift-gitops-argocd-application-controller
+
 namespaces:
 - openshift-gitops
 - gitops-config
