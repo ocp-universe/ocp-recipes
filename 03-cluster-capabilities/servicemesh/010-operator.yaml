@@ -6,8 +6,7 @@
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
-metadata:
-  generation: 1  
+metadata: 
   name: servicemeshoperator
   namespace: openshift-operators
   labels:
@@ -18,6 +17,6 @@ spec:
   name: servicemeshoperator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: servicemeshoperator.v2.0.3-0
+  startingCSV: servicemeshoperator.v2.0.3
 ---
 
