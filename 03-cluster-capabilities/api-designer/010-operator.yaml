@@ -12,6 +12,20 @@ metadata:
   labels:
     openshift.io/cluster-monitoring: "true"
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: apicurito-role-binding
+  namespace: apicurito
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
