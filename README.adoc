@@ -18,27 +18,13 @@ The idea of the solution to manage a Kubernetes/OpenShift cluster in the GitOps 
 
 * link:01-init[Init]: which installs the minium tools to support GitOps, here ArgoCD using the `Red Hat OpenShift GitOps`
 * link:02-cluster-config[Cluster Config]: The ArgoCD project and app which will manage the cluster and maintain the capabilities. Here is the list of wanted capabilities defined - the descriptive state of your cluster.
-* link:03-cluster-capabilities[Cluster Capabilities]: All the possible (cross-cutting) capabilities
+* link:03-cluster-capabilities[Cluster Capabilities]: All the possible (cross-cutting) capabilities. Usually this is an own repository and not project specific.
 
 == Installation
 
 Configure the 'values.yaml' in link:02-cluster-config[Cluster Config] to select the desired state. Some capability examples are in link:03-cluster-capabilities[Cluster Capabilities], any other repository is how ever possible.
 
-Follow the instruction in link:01-init[Init] to install.
-
-
-== Overview
-
-This collections holds various recipes to manage (infrastructure) workload like different Operators for Pipeline, ArgoCD, SealedSecrets etc. All recipes use the same structure
-
-* *00_pre*: directory contains resources for the preparation phase
-* *01_work*: directory for the main resources
-* *02_post*: directory for post phase resource
-
-It is not mandatory to use all directories.
-Every recipe should also provide an `install.sh` and `remove.sh`, but can refer to the basic link:install.sh[] / link:remove.sh[].
-
-Currently general yaml resource and kustomize yaml files are supported.
+Follow the instruction in link:01-init[Init] to install to foundation (ArgoCD and the bootstrap config).
 
 == Summary
 

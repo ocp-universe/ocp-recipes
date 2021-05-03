@@ -26,4 +26,5 @@ spec:
   name: openshift-gitops-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: openshift-gitops-operator.v1.1.0
+  # OCP4.6
+  startingCSV: openshift-gitops-operator.v1.0.0
