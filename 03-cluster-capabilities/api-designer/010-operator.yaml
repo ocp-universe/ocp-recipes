@@ -1,0 +1,45 @@
+# Operator installation
+#
+# apicurito
+# Version: v1.0.0, channel: alpha
+#
+# - Operator subscription
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: api-designer
+  labels:
+    openshift.io/cluster-monitoring: "true"
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: api-designer-xlmsf
+  namespace: api-designer
+spec:
+  targetNamespaces:
+  - api-designer
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: fuse-apicurito
+  namespace: api-designer
+spec:
+  channel: fuse-apicurito-7.8.x
+  installPlanApproval: Automatic
+  name: fuse-apicurito
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: fuse-apicurito.v7.8.0
+---
+apiVersion: apicur.io/v1alpha1
+kind: Apicurito
+metadata:
+  name: apicurito-service
+  namespace: api-designer
+spec:
+  size: 1
+
+
