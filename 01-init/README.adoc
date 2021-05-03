@@ -25,6 +25,7 @@ application.argoproj.io/00-argocd-bootstrap-config created
 subscription.operators.coreos.com/openshift-gitops-operator created
 ----
 
+Wait for that ArgoCD to be installed. The installation process also deploys an ArgoCD Application which links the link:../02-cluster-config[Cluster Config]. 
 
 == Summary
 
