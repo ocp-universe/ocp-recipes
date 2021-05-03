@@ -49,6 +49,7 @@ roleRef:
   name: tekton-role
 {{- end }}
 
+# ServiceAccount for Tekton Pipeline execution in openshift-gitops namespace
 ---
 apiVersion: v1
 kind: ServiceAccount
