@@ -28,9 +28,9 @@ image:static/ocp-recipes.png[]
 
 == Installation
 
-Configure the 'values.yaml' in link:02-cluster-config[Cluster Config] to select the desired state. Some capability examples are in link:03-cluster-capabilities[Cluster Capabilities], any other repository is how ever possible.
+Configure the 'values.yaml' in link:02-cluster-config[Cluster Config] to select the desired state (and capabilities). Some capability examples are in link:03-cluster-capabilities[Cluster Capabilities], any other repository is how ever possible.
 
-Follow the instruction in link:01-init[Init] to install to foundation (ArgoCD and the bootstrap config).
+Follow the instruction in link:01-init[Init] to install the foundation (ArgoCD and the bootstrap config).
 
 == Summary
 
