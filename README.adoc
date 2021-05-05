@@ -20,6 +20,12 @@ The idea of the solution to manage a Kubernetes/OpenShift cluster in the GitOps 
 * link:02-cluster-config[Cluster Config]: The ArgoCD project and app which will manage the cluster and maintain the capabilities. Here is the list of wanted capabilities defined - the descriptive state of your cluster.
 * link:03-cluster-capabilities[Cluster Capabilities]: All the possible (cross-cutting) capabilities. Usually this is an own repository and not project specific.
 
+Figure <<figure1>> visualize the relation between the repositories and configuration artifacts.
+
+[[figure1, Overview solution]]
+image:static/ocp-recipes.png[]
+
+
 == Installation
 
 Configure the 'values.yaml' in link:02-cluster-config[Cluster Config] to select the desired state. Some capability examples are in link:03-cluster-capabilities[Cluster Capabilities], any other repository is how ever possible.
