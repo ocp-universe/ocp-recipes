@@ -31,14 +31,14 @@ argocd:
       # optional
       #server: 
       project: argocd-bootstrap-project
-#    - name: service-mesh
-#      repo: https://github.com/ocp-universe/ocp-recipes
-#      path: 03-cluster-capabilities/servicemesh
-#      revision: main
-#      namespace: openshift-gitops
-#      # optional
-#      #server: 
-#      project: argocd-bootstrap-project
+    - name: service-mesh
+      repo: https://github.com/ocp-universe/ocp-recipes
+      path: 03-cluster-capabilities/servicemesh
+      revision: main
+      namespace: openshift-gitops
+      # optional
+      #server: 
+      project: argocd-bootstrap-project
     - name: ocp-web-terminal
       repo: https://github.com/ocp-universe/ocp-recipes
       path: 03-cluster-capabilities/web-terminal
@@ -47,11 +47,11 @@ argocd:
       # optional
       #server: 
       project: argocd-bootstrap-project
-    - name: ocp-rhacm
-      repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/rhacm
-      revision: main
-      namespace: openshift-gitops
-      # optional
-      #server: 
-      project: argocd-bootstrap-project
+#    - name: ocp-rhacm
+#      repo: https://github.com/ocp-universe/ocp-recipes
+#      path: 03-cluster-capabilities/rhacm
+#      revision: main
+#      namespace: openshift-gitops
+#      # optional
+#      #server: 
+#      project: argocd-bootstrap-project

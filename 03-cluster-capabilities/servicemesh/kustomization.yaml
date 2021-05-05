@@ -10,5 +10,8 @@ kind: Kustomization
 
 
 resources:
+- ../ocp-elasticsearch
+- ../jaeger
+- ../kiali
 - 010-operator.yaml
 - 020-instances.yaml
