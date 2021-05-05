@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: ocp-recipe-rhacm
+  author: Hafid Haddouti
+  description: |
+    Set up Red Hat Advanced Cluster Manager
+  license: MIT
+  min_ansible_version: 2.8
+  platforms: []
+  galaxy_tags:
+  - ocp
+  - openshift
+  - management
+dependencies: []
+

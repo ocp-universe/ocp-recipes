@@ -1,0 +1,26 @@
+
+# Open Data Hub Operator
+# 
+# opendatahub-operator
+# Version: 1.0.10, channel: beta
+#
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: "{{ ocp_recipe_opendatahub.operator_name }}"
+  namespace: "{{ ocp_recipe_opendatahub.target_namespace }}"
+spec:
+  channel: "{{ ocp_recipe_opendatahub.channel }}"
+{% if ocp_recipe_opendatahub.automatic_install_plan_approval | d(True) | bool %}
+  installPlanApproval: Automatic
+{% else %}
+  installPlanApproval: Manual
+{% endif %}
+  name: "{{ ocp_recipe_opendatahub.operator_name }}"
+  source: "{{ ocp_recipe_opendatahub.operator_source }}"
+  sourceNamespace: "{{ ocp_recipe_opendatahub.operator_source_namespace }}"
+{% if ocp_recipe_opendatahub.starting_csv | d("") | length > 0 %}
+  startingCSV: "{{ ocp_recipe_opendatahub.operator_name }}.{{ ocp_recipe_opendatahub.starting_csv }}"
+{% endif %}
+

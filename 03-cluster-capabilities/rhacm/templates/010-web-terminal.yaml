@@ -1,0 +1,36 @@
+# rhacm
+#
+# Using Tekton and ansible-runner
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: ocp-rhacm-task-run
+  namespace: {{ .Values.namespace | quote }}
+spec:
+  taskRef:
+    name: ansible-runner-with-clone
+  params:
+    # ansible-runner parameters
+    - name: project-dir
+      value: '03-cluster-capabilities/rhacm'
+    - name: args
+      value:
+      - '-p main.yml'
+      - '--project-dir 03-cluster-capabilities/rhacm'
+      #- '--project-dir "rhacm"'
+    - name: largs
+      value: '-p main.yml --project-dir 03-cluster-capabilities/rhacm'     
+    # git-clone parameters
+    - name: url
+      value: "https://github.com/ocp-universe/ocp-recipes"
+    - name: revision
+      value: "main"
+    - name: sslVerify
+      value: "false"       
+  workspaces:
+    - name: runner-dir
+      emptyDir: {}
+  podTemplate:
+    securityContext:
+      runAsUser: 0

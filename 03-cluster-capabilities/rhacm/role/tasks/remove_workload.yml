@@ -1,0 +1,81 @@
+---
+# Implement your Workload removal tasks here
+
+- name: Set up ocp_recipe_operator combined dictionary
+  set_fact:
+    ocp_recipe_operator: >-
+      {{ ocp_recipe_operator_defaults
+       | combine(oocp_recipe_operator_vars    | default( {} ),
+                 ocp_recipe_operator_secrets | default( {}), recursive=true )
+      }}
+
+- name: Find all instances
+  k8s_facts:
+    api_version: operator.open-cluster-management.io/v1
+    kind: MultiClusterHub
+  register: r_instances
+
+- name: Remove all instances
+  when: r_instances.resources | length > 0
+  k8s:
+    state: absent
+    definition: "{{ item }}"
+  loop: "{{ r_instances.resources }}"
+
+
+- name: Get all InstallPlans
+  k8s_facts:
+    api_version: operators.coreos.com/v1alpha1
+    kind: InstallPlan
+    namespace: "{{ ocp_recipe_operator.target_namespace }}"
+  register: r_install_plans
+
+- name: Find InstallPlan Name
+  set_fact:
+    ocp_recipe_operator_install_plan_name: "{{ r_install_plans.resources | to_json | from_json | json_query(query) }}"
+  vars:
+    query: >-
+      [?starts_with(spec.clusterServiceVersionNames[0], 'advanced-cluster-management')].metadata.name|[0]
+
+- name: Find all related CSVs
+  set_fact:
+    ocp_recipe_operator_csvs:  "{{ r_install_plans.resources | to_json | from_json | json_query(query) }}"
+  vars:
+    query: >-
+      [?starts_with(spec.clusterServiceVersionNames[0], 'advanced-cluster-management')].spec.clusterServiceVersionNames
+
+- name: Remove all related CSVs
+  when: ocp_recipe_operator_csvs | length > 0
+  k8s:
+    state: absent
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    name: "{{ item }}"
+    namespace: "{{ ocp_recipe_operator.target_namespace }}"
+  loop: "{{ ocp_recipe_operator_csvs[0] }}"
+
+- name: Remove Subscription
+  k8s:
+    state: absent
+    definition: "{{ lookup('template', item ) | from_yaml }}"
+  loop:
+  - ./templates/subscription.j2
+
+
+- name: Remove InstallPlan
+  when:
+  - ocp_recipe_operator_install_plan_name is defined
+  - ocp_recipe_operator_install_plan_name |d("") | length > 0
+  k8s:
+    state: absent
+    api_version: operators.coreos.com/v1alpha1
+    kind: InstallPlan
+    name: "{{ ocp_recipe_operator_install_plan_name }}"
+    namespace: "{{ ocp_recipe_operator.target_namespace }}"
+
+
+# Leave this as the last task in the playbook.
+- name: remove_workload tasks complete
+  debug:
+    msg: "Remove Workload tasks completed successfully."
+  when: not silent|bool
