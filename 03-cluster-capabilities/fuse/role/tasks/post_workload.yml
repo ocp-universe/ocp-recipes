@@ -1,0 +1,21 @@
+---
+# Implement your Post Workload deployment tasks here
+
+
+- name: Deploy Open Data Hub instance
+  when: ocp_recipe_operator.deploy_instance | bool
+  block:
+  - name: Create all config and instance
+    k8s:
+      state: present
+      definition: "{{ lookup('file', item ) | from_yaml }}"
+    loop:
+    - ./files/operator-postaction.yaml
+    - ./files/operator-postaction2.yaml
+
+
+# Leave this as the last task in the playbook.
+- name: post_workload tasks complete
+  debug:
+    msg: "Post-Workload Tasks completed successfully."
+  when: not silent|bool

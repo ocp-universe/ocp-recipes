@@ -1,0 +1,8 @@
+# main Ansible playbook includes the role
+---
+- hosts: localhost
+  connection: local
+  collections:
+    - community.kubernetes
+  roles:
+  - role: 'role/'

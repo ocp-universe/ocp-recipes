@@ -1,0 +1,8 @@
+# Helm values for: Fuse with Ansible
+
+namespace: gitops-config
+
+project_dir: '03-cluster-capabilities/fuse'
+repo:
+  url: https://github.com/ocp-universe/ocp-recipes
+  revision: main

@@ -1,0 +1,72 @@
+
+# Operator
+# 
+---
+# Source: ocp-fuse/templates/010-fuse.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fuse
+  labels:
+    openshift.io/cluster-monitoring: "true"
+---
+# Source: ocp-fuse/templates/010-fuse.yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: fuse-console
+  namespace: fuse
+spec:
+  targetNamespaces:
+  - fuse
+---
+# Source: ocp-fuse/templates/010-fuse.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: fuse-console
+  namespace: fuse 
+spec:
+  channel: fuse-console-7.8.x
+  installPlanApproval: Automatic
+  name: fuse-console
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: fuse-console.v7.8.1
+#---
+## Source: ocp-fuse/templates/011-fuse-online.yaml
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: fuse-online
+#  labels:
+#    openshift.io/cluster-monitoring: "true"
+---
+# Source: ocp-fuse/templates/011-fuse-online.yaml
+# Red Hat Fuse Online Subscription
+#
+#---
+## Source: ocp-fuse/templates/011-fuse-online.yaml
+#apiVersion: operators.coreos.com/v1
+#kind: OperatorGroup
+#metadata:
+#  name: fuse
+#  namespace: fuse
+#spec:
+#  targetNamespaces:
+#  - fuse
+---
+# Source: ocp-fuse/templates/011-fuse-online.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: fuse
+  namespace: fuse 
+spec:
+  channel: fuse-online-v7.8.x
+  installPlanApproval: Automatic
+  name: fuse-online
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: fuse-online-operator.v7.8.0
+

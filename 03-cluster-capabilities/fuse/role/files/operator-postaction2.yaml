@@ -1,0 +1,17 @@
+# Instance
+---
+apiVersion: syndesis.io/v1beta2
+kind: Syndesis
+metadata:
+  name: fuse-online
+  namespace: fuse
+spec:
+  addons:
+    jaeger:
+      enabled: true
+    ops:
+      enabled: false
+    publicApi:
+      enabled: false
+    todo:
+      enabled: false
