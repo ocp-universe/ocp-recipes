@@ -13,7 +13,7 @@ toc::[]
 
 Deploys link:https://opendatahub.io/[Open Data Hub] into a Kubernetes/OpenShift cluster using Ansible
 
-NOTE: Attention, currently does the installation not work due conflicts with other operators, see link:https://github.com/opendatahub-io/opendatahub-operator/issues/128[issue]
+Important to note, create a `KfDef` not in the same namespace where the operator is installed (see link:https://github.com/opendatahub-io/opendatahub-operator/issues/128[issue]).
 
 == Action
 
@@ -49,7 +49,6 @@ N/A
 == Open
 
 N/A
-
 
 == License
 

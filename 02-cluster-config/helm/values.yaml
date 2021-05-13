@@ -5,9 +5,9 @@ argocd:
   create: true
 
   apps:
-    - name: sealedsecret
+    - name: fuse
       repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/sealedsecret
+      path: 03-cluster-capabilities/fuse
       revision: main
       namespace: openshift-gitops
       # optional fields
@@ -15,43 +15,4 @@ argocd:
       project: argocd-bootstrap-project
       #prune: true/false
       #selfHeal: true/false      
-    - name: api-designer
-      repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/api-designer
-      revision: main
-      namespace: openshift-gitops
-      # optional
-      #server: 
-      project: argocd-bootstrap-project      
-    - name: tekton-common-manifest
-      repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/tekton-common-tasks/helm
-      revision: main
-      namespace: openshift-gitops
-      # optional
-      #server: 
-      project: argocd-bootstrap-project
-    - name: service-mesh
-      repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/servicemesh
-      revision: main
-      namespace: openshift-gitops
-      # optional
-      #server: 
-      project: argocd-bootstrap-project
-    - name: ocp-web-terminal
-      repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/web-terminal
-      revision: main
-      namespace: openshift-gitops
-      # optional
-      #server: 
-      project: argocd-bootstrap-project
-#    - name: ocp-rhacm
-#      repo: https://github.com/ocp-universe/ocp-recipes
-#      path: 03-cluster-capabilities/rhacm
-#      revision: main
-#      namespace: openshift-gitops
-#      # optional
-#      #server: 
-#      project: argocd-bootstrap-project
+    
