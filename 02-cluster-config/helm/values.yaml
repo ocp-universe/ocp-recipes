@@ -13,6 +13,11 @@ argocd:
       # optional
       #server: 
       project: argocd-bootstrap-project
+      ignores:
+      - group: tekton.dev
+        kind: TaskRun
+        jsonPointers:
+        - /metadata/labels
     - name: fuse
       repo: https://github.com/ocp-universe/ocp-recipes
       path: 03-cluster-capabilities/fuse/helm
