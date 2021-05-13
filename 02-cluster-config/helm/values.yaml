@@ -18,6 +18,7 @@ argocd:
         kind: TaskRun
         jsonPointers:
         - /metadata/labels
+        - /metadata/annotations
     - name: fuse
       repo: https://github.com/ocp-universe/ocp-recipes
       path: 03-cluster-capabilities/fuse/helm
@@ -32,5 +33,6 @@ argocd:
       - group: tekton.dev
         kind: TaskRun
         jsonPointers:
-        - /metadata/labels  
+        - /metadata/labels
+        - /metadata/annotations
     
