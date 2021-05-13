@@ -15,7 +15,7 @@ argocd:
       project: argocd-bootstrap-project
     - name: fuse
       repo: https://github.com/ocp-universe/ocp-recipes
-      path: 03-cluster-capabilities/fuse
+      path: 03-cluster-capabilities/fuse/helm
       revision: main
       namespace: openshift-gitops
       # optional fields
