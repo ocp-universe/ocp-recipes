@@ -27,5 +27,10 @@ argocd:
       #server: 
       project: argocd-bootstrap-project
       #prune: true/false
-      #selfHeal: true/false      
+      #selfHeal: true/false    
+      ignores:
+      - group: tekton.dev
+        kind: TaskRun
+        jsonPointers:
+        - /metadata/labels  
     
