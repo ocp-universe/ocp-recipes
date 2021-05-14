@@ -34,7 +34,7 @@ Follow the instruction in link:01-init[Init] to install the foundation (ArgoCD a
 
 == Summary
 
-Recipes collection to avoid further manual steps and get always the same outcome.
+GitOps approach also for maintaining Kubernetes Clusters. Reusability. Idempotent results.
 
 == References
 

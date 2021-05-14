@@ -1,9 +1,12 @@
 # Helm values for: ArgoCD Cluster Config using app-of-apps pattern
 
 argocd:
-  # Specifies whether a ArgoCD app createion is wanted or not
+  # Specifies whether a ArgoCD app creation is wanted or not
   create: true
-
+  cluster:
+    name: "cluster-name"
+    env: "stage"
+    
   apps:
     - name: tekton-common-manifest
       repo: https://github.com/ocp-universe/ocp-recipes

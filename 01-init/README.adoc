@@ -11,7 +11,12 @@ toc::[]
 
 == Overview
 
-This section contains the initialization part.
+This section contains the initialization part. It installs OpenShift GitOps with Argo CD and Tekton.
+
+The first version of this solution used the ArgoCD link:https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/[App of Apps pattern] to bootstrap and manage the dynamic list of applications.
+
+The latest version use the new feature base on link:https://argocd-applicationset.readthedocs.io/en/stable/[ArgoCD ApplicationSet]. `ApplicationSet` generates `Application` resources using configuration from a static list or git repository.
+
 
 == Installation
 
@@ -29,11 +34,12 @@ Wait for that ArgoCD to be installed. The installation process also deploys an A
 
 == Summary
 
-This is the foundation for the GitOps solution to manage a Kubernetes/OpenShift cluster.
+This is the foundation for the GitOps solution to manage a Kubernetes/OpenShift cluster using Argo CD.
 
 == References
 
-N/A
+* link:https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/[App of Apps pattern]
+* link:https://argocd-applicationset.readthedocs.io/en/stable/[ArgoCD ApplicationSet]
 
 == Open
 

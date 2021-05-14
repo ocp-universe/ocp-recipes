@@ -17,6 +17,7 @@ spec:
   sourceRepos:
     - '*'
 ---
+# App of apps pattern: This is the root Application reference the apps representing the various capabilities
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

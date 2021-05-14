@@ -1,0 +1,47 @@
+---
+# Logical group for applications
+# the config is very generic
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd-bootstrap-project
+  namespace: openshift-gitops
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    # List all namespaces which ArgoCD should watch within this project
+    - namespace: '*'
+      server: '*'
+  sourceRepos:
+    - '*'
+---
+# Modern way in Argo CD to bootstrap a cluster, ApplicationSet instead of App of apps pattern
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-bootstrap-set
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/ocp-universe/ocp-recipes.git
+      revision: main
+      files:
+      - path: "02-cluster-config/cluster-config.json"
+  template:
+    metadata:
+      name: '{{argocd.apps.name}}'
+    spec:
+      project: argocd-bootstrap-project
+      source:
+        repoURL: '{{argocd.apps.repo}}'
+        targetRevision: '{{argocd.apps.revision}}'
+        path: '{{argocd.apps.path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: openshift-gitops
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
