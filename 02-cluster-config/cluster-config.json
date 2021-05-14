@@ -1,47 +1,38 @@
-{
-    "argocd": {
-      "create": true,
-      "cluster": {
-        "name": "cluster-name",
-        "env": "stage"
-      },
-      "apps": [
-        {
-          "name": "sealedsecret",
-          "repo": "https://github.com/ocp-universe/ocp-recipes",
-          "path": "03-cluster-capabilities/sealedsecret",
-          "revision": "main",
-          "namespace": "openshift-gitops",
-          "project": "argocd-bootstrap-project",
-          "ignores": [
-            {
-              "group": "tekton.dev",
-              "kind": "TaskRun",
-              "jsonPointers": [
-                "/metadata/labels",
-                "/metadata/annotations"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "service-mesh",
-          "repo": "https://github.com/ocp-universe/ocp-recipes",
-          "path": "03-cluster-capabilities/service-mesh",
-          "revision": "main",
-          "namespace": "openshift-gitops",
-          "project": "argocd-bootstrap-project",
-          "ignores": [
-            {
-              "group": "tekton.dev",
-              "kind": "TaskRun",
-              "jsonPointers": [
-                "/metadata/labels",
-                "/metadata/annotations"
-              ]
-            }
-          ]
-        }
-      ]
-    }
+[
+  {
+    "name": "sealedsecret",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/sealedsecret",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "service-mesh",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/service-mesh",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
   }
+]

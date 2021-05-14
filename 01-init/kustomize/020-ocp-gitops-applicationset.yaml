@@ -22,6 +22,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: argocd-bootstrap-set
+  namespace: openshift-gitops
 spec:
   generators:
   - git:
@@ -31,13 +32,13 @@ spec:
       - path: "02-cluster-config/cluster-config.json"
   template:
     metadata:
-      name: '{{argocd.apps.name}}'
+      name: '{{name}}'
     spec:
       project: argocd-bootstrap-project
       source:
-        repoURL: '{{argocd.apps.repo}}'
-        targetRevision: '{{argocd.apps.revision}}'
-        path: '{{argocd.apps.path}}'
+        repoURL: '{{repo}}'
+        targetRevision: '{{revision}}'
+        path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: openshift-gitops
