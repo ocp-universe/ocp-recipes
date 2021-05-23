@@ -38,7 +38,7 @@
   {
     "name": "service-mesh",
     "repo": "https://github.com/ocp-universe/ocp-recipes",
-    "path": "03-cluster-capabilities/service-mesh",
+    "path": "03-cluster-capabilities/servicemesh",
     "revision": "main",
     "namespace": "openshift-gitops",
     "project": "argocd-bootstrap-project",
