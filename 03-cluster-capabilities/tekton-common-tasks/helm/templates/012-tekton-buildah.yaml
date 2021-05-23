@@ -77,6 +77,8 @@ spec:
       name: build
       resources: {}
       script: |
+        #!/usr/bin/env bash
+        
         APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
 
         if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
@@ -99,6 +101,8 @@ spec:
       name: push
       resources: {}
       script: |
+        #!/usr/bin/env bash
+
         APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
 
         if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
