@@ -80,20 +80,9 @@ spec:
         #!/usr/bin/env bash
 
         APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
-
-        # if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
-        if [ ${#APP_IMAGE_TAGS[@]} -eq 0 ]; then 
-          for tag in $APP_IMAGE_TAGS; do              
-              TMP_IMG="$(params.APP_IMAGE_BASE):$tag"
-
-              echo "buildah bud $TMP_IMG"
-
-              buildah --storage-driver=$(params.STORAGE_DRIVER) bud \
-                $(params.BUILD_EXTRA_ARGS) --format=$(params.FORMAT) \
-                --tls-verify=$(params.TLSVERIFY) --no-cache \
-                -f $(params.DOCKERFILE) -t $TMP_IMG $(params.CONTEXT)
-          done
-        fi
+        echo $APP_IMAGE_TAGS
+        echo $(params.APP_IMAGE_TAGS)
+        
       volumeMounts:
         - mountPath: /var/lib/containers
           name: varlibcontainers
@@ -106,19 +95,6 @@ spec:
 
         APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
 
-        # if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
-        if [ ${#APP_IMAGE_TAGS[@]} -eq 0 ]; then 
-          for tag in $APP_IMAGE_TAGS; do              
-              TMP_IMG="$(params.APP_IMAGE_BASE):$tag"
-
-              echo "buildah push $TMP_IMG"
-
-              buildah --storage-driver=$(params.STORAGE_DRIVER) push \
-                $(params.PUSH_EXTRA_ARGS) --tls-verify=$(params.TLSVERIFY) \
-                --digestfile $(workspaces.source.path)/image-digest $TMP_IMG \
-                docker://$TMP_IMG
-          done
-        fi
       volumeMounts:
         - mountPath: /var/lib/containers
           name: varlibcontainers
