@@ -78,10 +78,11 @@ spec:
       resources: {}
       script: |
         #!/usr/bin/env bash
-        
+
         APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
 
-        if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
+        # if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
+        if [ ${#APP_IMAGE_TAGS[@]} -eq 0 ]; then 
           for tag in $APP_IMAGE_TAGS; do              
               TMP_IMG="$(params.APP_IMAGE_BASE):$tag"
 
@@ -105,7 +106,8 @@ spec:
 
         APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
 
-        if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
+        # if [[ ! -z "$APP_IMAGE_TAGS" ]]; then 
+        if [ ${#APP_IMAGE_TAGS[@]} -eq 0 ]; then 
           for tag in $APP_IMAGE_TAGS; do              
               TMP_IMG="$(params.APP_IMAGE_BASE):$tag"
 
