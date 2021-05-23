@@ -30,7 +30,7 @@ spec:
       type: string
     - description: Image tages that buildah will produce. Will be concatenated with APP_IMAGE_BASE
       name: APP_IMAGE_TAGS
-      type: string
+      type: array
     - description: Reference of the image buildah will produce.
       name: IMAGE
       type: string
