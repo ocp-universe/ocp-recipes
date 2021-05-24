@@ -1,0 +1,13 @@
+# helm-servicemesh.
+# OCP4.7
+
+operator:
+  name: servicemeshoperator
+  namespace: openshift-operators
+  channel: stable
+  approval: Automatic
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  version: servicemeshoperator.v2.0.3
+
+

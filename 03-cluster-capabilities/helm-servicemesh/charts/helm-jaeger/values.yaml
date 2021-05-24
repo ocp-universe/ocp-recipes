@@ -1,0 +1,13 @@
+# helm-jaeger.
+# OCP 4.7
+
+operator:
+  name: jaeger-product
+  namespace: openshift-operators
+  channel: 1.20-stable
+  approval: Automatic
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  version: jaeger-operator.v1.20.3
+
+

@@ -1,0 +1,13 @@
+# helm-ocp-elasticsearch.
+# OCP4.7
+
+operator:
+  name: elasticsearch-operator
+  namespace: openshift-operators
+  channel: "5.0"
+  approval: Automatic
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  version: elasticsearch-operator.5.0.3-6
+
+

@@ -1,0 +1,56 @@
+= OpenShift Recipes: Jaeger
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+link:https://www.jaegertracing.io/[Jaeger], link:https://docs.openshift.com/container-platform/4.7/jaeger/rhbjaeger-release-notes.html[Red Hat Jaeger], tracing solution.
+
+toc::[]
+
+== Overview
+
+Installs Red Hat Jaeger operator, the community version is not supported.
+
+|===
+| Title | Red Hat Jaeger
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
+== Usage
+
+Details about link:https://docs.openshift.com/container-platform/4.7/jaeger/jaeger_install/rhbjaeger-deploying.html[installation and configuration].
+
+To support tracing is it mandatory to inject the Jaeger agent sidecare, e.g. automatically with the annotation 
+----
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
+----
+
+== Summary
+
+Red Hat Jaeger is installed. Relevant for OpenShift Service Mesh
+
+== References
+
+* OpenShift Jaeger - Docu: link:https://docs.openshift.com/container-platform/4.7/service_mesh/v2x/installing-ossm.html#jaeger-operator-install_installing-ossm[]
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.
