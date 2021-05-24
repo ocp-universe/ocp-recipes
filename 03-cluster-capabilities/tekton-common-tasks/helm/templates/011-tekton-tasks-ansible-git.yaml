@@ -181,6 +181,9 @@ spec:
         #!/bin/bash
         set -e
 
+        echo $PWD
+        ls -l .
+
         if [ -f requirements.txt ];
         then
           pip3 install --user \
