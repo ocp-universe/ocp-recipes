@@ -1,52 +1,37 @@
-= OpenShift Recipes: Red Hat Fuse with Fuse Online
+= OpenShift Recipes: Red Hat API Designer
 :author: Hafid Haddouti
 :toc: macro
 :toclevels: 4
 :sectlinks:
 :sectanchors:
 
-Red Hat Fuse and Fuse Online, using Ansible.
+link:#[Red Hat API Designer], API / OpenAPI editor.
 
 toc::[]
 
 == Overview
 
-Deploys link:https://www.redhat.com/en/technologies/jboss-middleware/fuse[Red Hat Fuse] into a Kubernetes/OpenShift cluster using Helm. If enabled, also link:https://www.redhat.com/en/technologies/jboss-middleware/fuse-online[Red Hagt Fuse Online] will be installed.
+Installs Red Hat API Designer. API Designer is a lightweight version of link:../apicurio-studio[Apicurio Studio] without storage capabilities.
 
 |===
-| Title | Red Hat Fuse / Fuse Online
+| Title | Red Hat API Designer
 | Status | In testing 
-| Deploy Model | Ansible
+| Deploy Model | kustomize
 | Dependencies | n/a
 | OCP Version | >= 4.6
 |===
 
-== Action
+== Usage
 
-=== Deploy
-
-----
-ansible-playbook -i localhost ./main.yml \
-    -e"silent=False" \
-    -e"ACTION=create"
-----
-
-
-=== Remove
-
-----
-ansible-playbook -i localhost ./main.yml \
-    -e"silent=False" \
-    -e"ACTION=remove"
-----
+n/a
 
 == Summary
 
-Red Hat Fuse / Fuse Online is installed.
+Red Hat API Designer is installed.
 
 == References
 
-N/A
+* n/a
 
 == Open
 

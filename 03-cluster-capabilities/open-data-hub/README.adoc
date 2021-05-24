@@ -5,7 +5,7 @@
 :sectlinks:
 :sectanchors:
 
-Open Data Hub, with Ansible
+Open Data Hub, a Data & AI platform.
 
 toc::[]
 
@@ -15,11 +15,18 @@ Deploys link:https://opendatahub.io/[Open Data Hub] into a Kubernetes/OpenShift 
 
 Important to note, create a `KfDef` not in the same namespace where the operator is installed (see link:https://github.com/opendatahub-io/opendatahub-operator/issues/128[issue]).
 
+|===
+| Title | Open Data Hub
+| Status | In testing 
+| Deploy Model | Ansible
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
 == Action
 
 To manually install/remove use the `ansible-playbook`, otherwise the intention is to use `Tekton` with `ansible-runner` to execute this playbook and role.
 Verify the configuration in link:role/defaults/main.yml[].
-
 
 === Deploy
 

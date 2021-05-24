@@ -13,6 +13,14 @@ toc::[]
 
 Deploys link:https://www.redhat.com/en/technologies/management/advanced-cluster-management[RHACM] into a Kubernetes/OpenShift cluster using Ansible
 
+|===
+| Title | Red Hat Advanced Cluster Management for Kubernetes
+| Status | In testing 
+| Deploy Model | Ansible
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
 == Action
 
 To manually install/remove use the `ansible-playbook`, otherwise the intention is to use `Tekton` with `ansible-runner` to execute this playbook and role.
