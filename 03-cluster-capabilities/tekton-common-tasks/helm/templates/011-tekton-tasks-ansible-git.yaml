@@ -208,7 +208,7 @@ spec:
       script: |
         #!/bin/sh
         
-        find / -iname '*kube*'
+        find / -type f -iname ".kube*" -ls
 
         echo $(params.project-dir)
         ls -l ${WORKSPACE_OUTPUT_PATH}
