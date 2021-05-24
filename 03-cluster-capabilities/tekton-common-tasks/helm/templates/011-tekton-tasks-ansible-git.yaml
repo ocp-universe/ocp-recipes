@@ -216,6 +216,20 @@ spec:
 
       workingDir: '$(workspaces.runner-dir.path)'
 
+    - name: debug-k8s
+      image: 'quay.io/openshift/origin-cli:latest'
+      env:
+      - name: WORKSPACE_OUTPUT_PATH
+        value: $(workspaces.runner-dir.path)
+      script: |
+        #!/bin/sh
+        
+        oc get pods -n gitops-config
+
+        oc adm create-api-client-config
+        
+      workingDir: '$(workspaces.runner-dir.path)'
+
     - name: run-playbook
       image: docker.io/ansible/ansible-runner:1.4.6@sha256:bd09ef403f2f90f2c6bd133d7533e939058903f69223c5f12557a49e3aed14bb
       #command: ['entrypoint']
