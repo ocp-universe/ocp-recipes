@@ -181,11 +181,7 @@ spec:
         #!/bin/sh
         set -e
 
-        echo $PWD
-        ls -l .
         cd $(params.project-dir)
-        echo $PWD
-        ls -l .
         
         if [ -f requirements.txt ];
         then
@@ -200,6 +196,8 @@ spec:
           ansible-galaxy collection install -vv \
             -r requirements.yml
         fi
+
+        echo "Done."
       workingDir: '$(workspaces.runner-dir.path)'
 
     - name: debug
