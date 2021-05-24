@@ -76,12 +76,13 @@ spec:
     - image: $(params.BUILDER_IMAGE)
       name: build
       resources: {}
+      args: ["$(params.APP_IMAGE_TAGS[*])"]
       script: |
         #!/usr/bin/env bash
 
-        #APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
+        APP_IMAGE_TAGS="$@"
         #echo $APP_IMAGE_TAGS
-        echo $(params.APP_IMAGE_TAGS)
+        echo $APP_IMAGE_TAGS
         
       volumeMounts:
         - mountPath: /var/lib/containers
@@ -90,10 +91,12 @@ spec:
     - image: $(params.BUILDER_IMAGE)
       name: push
       resources: {}
+      args: ["$(params.APP_IMAGE_TAGS[*])"]
       script: |
-        #!/usr/bin/env bash
 
-        #APP_IMAGE_TAGS=$(params.APP_IMAGE_TAGS)
+        APP_IMAGE_TAGS="$@"
+        #echo $APP_IMAGE_TAGS
+        echo $APP_IMAGE_TAGS
 
       volumeMounts:
         - mountPath: /var/lib/containers
