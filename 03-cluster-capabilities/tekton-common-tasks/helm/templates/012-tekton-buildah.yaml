@@ -1,7 +1,6 @@
 # Buildah: enhance the buildah-v0-22-0 version with multi tag support
 # 
 # Solves also the issue with arrays as parameter, see https://github.com/tektoncd/pipeline/issues/2374
-{{- range .Values.namespaces }}
 ---
 apiVersion: tekton.dev/v1beta1
 kind: ClusterTask
@@ -10,7 +9,6 @@ metadata:
     tekton.dev/pipelines.minVersion: '0.19'
     tekton.dev/tags: image-build
   name: buildah-multi-tag
-  namespace: {{ . | quote }}
   labels:
     app.kubernetes.io/version: '0.1'
 spec:
@@ -139,4 +137,3 @@ spec:
       name: varlibcontainers
   workspaces:
     - name: source
-{{- end }}
