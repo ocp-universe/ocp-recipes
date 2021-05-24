@@ -1,0 +1,48 @@
+= OpenShift Recipes: Red Hat OpenShift Elasticsearch
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+
+OpenShift Elasticsearch.
+
+toc::[]
+
+== Overview
+
+Installs Red Hat OpenShift Elasticsearch operator, the community version is not supported.
+OpenShift Logging use the same Elasticsearch operator as prerequisite.
+
+|===
+| Title | Red Hat OpenShift Elasticsearch
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
+== Summary
+
+Red Hat OpenShift Elasticsearch is installed. Relevant for OpenShift Service Mesh or OpenShift Logging.
+
+== References
+
+* OpenShift Service Mesh: Elasticserach - Docu: link:https://docs.openshift.com/container-platform/4.7/service_mesh/v2x/installing-ossm.html#jaeger-operator-install-elasticsearch_installing-ossm[]
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

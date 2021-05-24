@@ -1,0 +1,46 @@
+= OpenShift Recipes: Sealed Secret
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+link:https://github.com/bitnami-labs/sealed-secrets[Sealed Secret].
+
+toc::[]
+
+== Overview
+
+Installs OpenShift Service Mesh, with all related components.
+
+|===
+| Title | Sealed Secret
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
+== Summary
+
+Sealed Secret is installed.
+
+== References
+
+* Bitnami SealedSecret: link:https://github.com/bitnami-labs/sealed-secrets[]
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

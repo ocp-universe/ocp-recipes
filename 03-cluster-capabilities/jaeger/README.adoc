@@ -5,11 +5,23 @@
 :sectlinks:
 :sectanchors:
 
-Jaeger, tracing solution.
+link:https://www.jaegertracing.io/[Jaeger], link:https://docs.openshift.com/container-platform/4.7/jaeger/rhbjaeger-release-notes.html[Red Hat Jaeger], tracing solution.
 
 toc::[]
 
 == Overview
+
+Installs Red Hat Jaeger operator, the community version is not supported.
+
+|===
+| Title | Red Hat Jaeger
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
+== Usage
 
 Details about link:https://docs.openshift.com/container-platform/4.7/jaeger/jaeger_install/rhbjaeger-deploying.html[installation and configuration].
 
@@ -21,11 +33,11 @@ To support tracing is it mandatory to inject the Jaeger agent sidecare, e.g. aut
 
 == Summary
 
-Jaeger installed.
+Red Hat Jaeger is installed. Relevant for OpenShift Service Mesh
 
 == References
 
-N/A
+* OpenShift Jaeger - Docu: link:https://docs.openshift.com/container-platform/4.7/service_mesh/v2x/installing-ossm.html#jaeger-operator-install_installing-ossm[]
 
 == Open
 

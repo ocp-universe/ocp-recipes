@@ -1,0 +1,44 @@
+= OpenShift Recipes - Cluster Capabilities
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Part of link:../README.adoc[OpenShift recipes] and covers all the cluster capabilities.
+
+toc::[]
+
+== Overview
+
+This directory collects the (cross-cutting) capabilities - also named add-on. Generally the capabilities manage in own separate repositories.
+For simplicity is this the initial setting and holding the foundation recipes in this directory.
+
+
+== Installation
+
+Follow the instruction per recipe capability.
+
+== Summary
+
+Set of cluster capability to make your cluster project ready.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

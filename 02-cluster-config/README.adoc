@@ -12,12 +12,26 @@ toc::[]
 == Overview
 
 This section contains the Cluster Configuration part to configure ArgoCD with the desired cluster capabilities.
-The installation and configuration is solved with `helm` and the link:helm/values.yaml[] contains the configuration for the desired capabilities.
+In a previous version was this solved with with `helm` and the link:helm/values.yaml[] contains the configuration for the desired capabilities.
+But with the enhancement in ArgoCD with `ApplicationSet` is this optimized to the link:cluster-config.json[] representing the list of desired capabilities.
 
 == Installation
 
 Generally this is not installed manually. During the link:../01-init[initialization] will be a new ArgoCD App configured and linked to this repo.
 
+To configure the desired cluster state with the needed capabilities, adjust the link:cluster-config.json[] considering the following structure
+
+|===
+| `name` | Name of the capability, will be used as identify in ArgoCD.
+| `repo` | GitHub repository to the capability holding the logic to install it. All link:https://argoproj.github.io/argo-cd/user-guide/application_sources/[ArgoCD supported ways] to install Kubernetes resources are allowed.
+| `path` | In case the Kubernetes resources are not in the root directory of the Git repo, set here the path.
+| `revision` | Git revision/branch.
+| `namespace` | Target namespace of the ArgoCD `Application` which will generated, not necessarily the target namespace of the capability itself.
+| `project` | Referenced ArgoCD project.
+| `ignores` | List of `ignoreDifferences` entries for the generated ArgoCD `Application`.
+|===
+
+The json object should be an *array*, the internal logic will iterate through the array and generate for any item an own ArgoCD `Application`.
 
 == Summary
 
