@@ -23,7 +23,7 @@ rules:
   verbs: ["get", "list", "watch"]
 # Permissions to create resources in associated Tasks
 - apiGroups: ["tekton.dev"]
-  resources: ["tasks", "task", "taskruns", "pipelines", "pipelineresources"]
+  resources: ["clustertasks", "tasks", "task", "taskruns", "pipelines", "pipelineresources"]
   verbs: ["create", "update", "patch", "delete"]
 - apiGroups: [""]
 # configmaps is needed for updating logging config
