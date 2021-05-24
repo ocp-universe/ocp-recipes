@@ -5,7 +5,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: fuse-task-run-{{ randAlphaNum 5 }}
+  name: fuse-task-run-{{ randAlphaNum 5 | lower }}
   namespace: {{ .Values.namespace | quote }}
   annotations:
       rollme: {{ randAlphaNum 5 | quote }}
