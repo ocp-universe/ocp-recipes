@@ -222,6 +222,7 @@ spec:
       script: |
         #!/bin/sh
 
+        export COLLECTIONS_PATHS="/tekton/home/.ansible/collections/ansible_collections"
         entrypoint ansible-runner $(params.largs) run $(params.project-dir) -vv
 
       workingDir: '$(workspaces.runner-dir.path)'
