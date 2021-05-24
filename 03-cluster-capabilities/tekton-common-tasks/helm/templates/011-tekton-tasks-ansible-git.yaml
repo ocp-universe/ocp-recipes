@@ -222,7 +222,7 @@ spec:
       script: |
         #!/bin/sh
 
-        entrypoint ansible-runner $(params.largs) run $(params.project-dir)
+        entrypoint ansible-runner $(params.largs) run $(params.project-dir) -vv
 
       workingDir: '$(workspaces.runner-dir.path)'
 {{- end }}
