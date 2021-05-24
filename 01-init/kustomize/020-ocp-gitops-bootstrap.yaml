@@ -1,3 +1,7 @@
+# #############################################################
+# #############          DEPRECATED            ################
+# replaced by ApplicationSet
+# #############################################################
 ---
 # Logical group for applications
 # the config is very generic
