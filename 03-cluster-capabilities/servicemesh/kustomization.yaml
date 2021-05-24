@@ -10,8 +10,11 @@ kind: Kustomization
 
 
 resources:
-- ../ocp-elasticsearch/overlays/ocp-4.7
-- ../jaeger/overlays/ocp-4.7
-- ../kiali/overlays/ocp-4.7
+#- ocp-elasticsearch/overlays/ocp-4.7/kustomization.yaml
+#- jaeger/overlays/ocp-4.7/kustomization.yaml
+#- kiali/overlays/ocp-4.7/kustomization.yaml
+- 010-operator-elasticsearch.yaml
+- 010-operator-jaeger.yaml
+- 010-operator-kiali.yaml
 - 010-operator.yaml
 - 020-instances.yaml
