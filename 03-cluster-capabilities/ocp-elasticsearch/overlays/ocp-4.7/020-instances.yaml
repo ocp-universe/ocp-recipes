@@ -1,0 +1,6 @@
+# OpenShift Elasticsearch instances
+# 
+# elasticsearch-operator
+# Version: 4.6.x, channel: 4.6
+#
+---

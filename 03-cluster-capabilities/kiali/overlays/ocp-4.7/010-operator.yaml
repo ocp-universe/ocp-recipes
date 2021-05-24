@@ -1,0 +1,19 @@
+# Red Hat Kiali Operator
+# 
+# kiali-operator
+# Version: 1.24.6, channel: stable
+#
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: kiali-ossm
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: kiali-ossm
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: kiali-operator.v1.24.7
+---
+

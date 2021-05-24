@@ -9,9 +9,8 @@ kind: Kustomization
 #  deploy: argocd
 
 
-resources:
-- ../ocp-elasticsearch/overlays/ocp-4.7
-- ../jaeger/overlays/ocp-4.7
-- ../kiali/overlays/ocp-4.7
+bases:
+- ../../base
+
+patchesStrategicMerge:
 - 010-operator.yaml
-- 020-instances.yaml
