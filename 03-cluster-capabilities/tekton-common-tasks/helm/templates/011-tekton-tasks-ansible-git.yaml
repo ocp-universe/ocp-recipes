@@ -213,7 +213,9 @@ spec:
         echo $(params.project-dir)
         ls -l ${WORKSPACE_OUTPUT_PATH}
         ls -l ${WORKSPACE_OUTPUT_PATH}/$(params.project-dir)
-
+        echo "-------------------"
+        ls -l /var/run/secrets/kubernetes.io/serviceaccount
+        
       workingDir: '$(workspaces.runner-dir.path)'
 
     - name: debug-k8s
@@ -223,7 +225,7 @@ spec:
         value: $(workspaces.runner-dir.path)
       script: |
         #!/bin/sh
-        
+                
         oc get pods -n gitops-config
 
         oc adm create-api-client-config
