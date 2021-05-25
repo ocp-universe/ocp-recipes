@@ -12,13 +12,27 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: edit 
-#---
-#apiVersion: rbac.authorization.k8s.io/v1
-#kind: Role
-#metadata:
-#  name: tekton-cluster-role
-#rules:
-# Permissions to create resources in associated Tasks
-#- apiGroups: ["tekton.dev"]
-#  resources: ["clustertasks"]
-#  verbs: ["create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cloudcredential-role
+  namespace: openshift-cloud-credential-operator
+rules:
+- apiGroups: ["cloudcredential.openshift.io"]
+  resources: ["credentialsrequests"]
+  verbs: ["create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-cr-edit
+  namespace: openshift-cloud-credential-operator
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: gitops-config
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cloudcredential-role
