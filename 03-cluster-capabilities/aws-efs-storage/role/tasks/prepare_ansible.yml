@@ -8,9 +8,9 @@
       src: "{{ requirements_path }}"
       dest: "{{ ocp_tmp_dir }}/{{ requirements_path }}"
 
-  - name: Import Ansible collection from requirement file
-    command: >-
-      ansible-galaxy collection install -r {{ ocp_tmp_dir }}/{{ requirements_path }}
+  #- name: Import Ansible collection from requirement file
+  #  command: >-
+  #    ansible-galaxy collection install -r {{ ocp_tmp_dir }}/{{ requirements_path }}
 
   # does not work with pip3, using wrong option -r
   #- name: Install packages related to ansible collection
