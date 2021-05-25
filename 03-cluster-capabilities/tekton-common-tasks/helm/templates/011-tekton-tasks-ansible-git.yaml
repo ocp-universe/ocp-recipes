@@ -217,7 +217,7 @@ spec:
         ls -l /var/run/secrets/kubernetes.io/serviceaccount
         echo "-------------------"
         cat /var/run/secrets/kubernetes.io/serviceaccount/token
-        
+
       workingDir: '$(workspaces.runner-dir.path)'
 
     - name: debug-k8s
@@ -232,6 +232,21 @@ spec:
 
         oc adm create-api-client-config
         
+      workingDir: '$(workspaces.runner-dir.path)'
+
+    - name: debug-swiss
+      image: 'hafbluebox/k8s-swiss:0.2'
+      env:
+      - name: WORKSPACE_OUTPUT_PATH
+        value: $(workspaces.runner-dir.path)
+      script: |
+        #!/bin/sh
+                
+        oc get pods -n gitops-config
+
+        cd $(params.project-dir)
+        ansible-playbook --list-tasks main.yml
+
       workingDir: '$(workspaces.runner-dir.path)'
 
     - name: run-playbook
