@@ -247,6 +247,22 @@ spec:
 
       workingDir: '$(workspaces.runner-dir.path)'
 
+    - name: run-playbook-swiss
+      image: 'hafbluebox/k8s-swiss:0.2'
+      env:
+      - name: WORKSPACE_OUTPUT_PATH
+        value: $(workspaces.runner-dir.path)
+      script: |
+        #!/bin/sh
+                
+        oc get pods -n gitops-config
+
+        cd $(params.project-dir)
+        #ansible-playbook --list-tasks main.yml
+        ansible-playbook -i localhost ./main.yml -e"silent=False" -e"ACTION=create"
+
+      workingDir: '$(workspaces.runner-dir.path)'
+
     - name: run-playbook
       image: docker.io/ansible/ansible-runner:1.4.6@sha256:bd09ef403f2f90f2c6bd133d7533e939058903f69223c5f12557a49e3aed14bb
       #command: ['entrypoint']
@@ -255,6 +271,8 @@ spec:
       script: |
         #!/bin/sh
 
+        exit 0
+        
         #export COLLECTIONS_PATHS="/tekton/home/.ansible/collections/ansible_collections"
         entrypoint ansible-runner $(params.largs) run $(params.project-dir) 
 
