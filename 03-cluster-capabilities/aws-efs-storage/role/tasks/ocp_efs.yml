@@ -1,0 +1,88 @@
+---
+# OCP EFS
+
+- name: OCP EFS installation
+  block:
+  # Display the EFS Filesystem ID
+  - name: Debug Filesystem ID
+    debug:
+      msg: "{{ cf_stack.stack_outputs.FileSystemId }}"
+
+  - name: Prepare helm repo and chart
+    block:
+    - name: Add helm repo
+      community.kubernetes.helm_repository:
+        name: stable
+        repo_url: "https://charts.helm.sh/stable"
+
+    - name: Install helm efs-provisioner chart
+      community.kubernetes.helm:
+        name: efs-provisioner
+        chart_ref: stable/efs-provisioner
+        release_namespace: default
+        values: "{{ lookup('template', '../templates/efs.helm.values.yaml.j2') | from_yaml }}"
+#          efsProvisioner.efsFileSystemId: "{{ cf_stack.stack_outputs.FileSystemId }}"
+#          efsProvisioner.awsRegion: "{{ aws_region }}"
+ #         efsProvisioner.path: "{{ aws_efs_access_point }}"
+ #         efsProvisioner.provisionerName: "{{ k8s_efs_provisioner_name }}"
+ #         efsProvisioner.storageClass.isDefault: "{{ k8s_efs_default }}"
+      register: helm_efs
+    
+    - name: Helm efs-provisioner release status
+      community.kubernetes.helm_info:
+        name: efs-provisioner
+        release_namespace: default
+      register: helm_info_efs
+    
+    - name: Debug Helm EFS release
+      debug:
+        msg: "{{ item }}"
+      loop:
+        - "{{ helm_efs }}"
+        - "{{ helm_info_efs }}"
+  
+  - name: Test EFS PV provisioning
+    block:
+    - name: OCP demo project
+      community.kubernetes.k8s:
+        api_version: v1
+        kind: Namespace
+        name: demo-efs
+        state: present   
+
+    - name: Provision PVC with EFS
+      community.kubernetes.k8s:
+        definition: "{{ lookup('file', '../files/demo.pvc.yaml') | from_yaml }}"
+        state: present
+
+    - name: Provision PVC with EFS
+      community.kubernetes.k8s_info:
+        api_version: v1
+        kind: PersistentVolumeClaim
+        name: pvc-test-dyn-efs
+        namespace: demo-efs
+      register: demo_pvc
+
+    - name: Debug PVC status
+      debug:
+        msg: "{{ demo_pvc }}"
+
+    - name: Debug PVC status
+      when: 
+      - demo_pvc.resources
+      - demo_pvc.resources[0].status.phase == "Bound"
+      debug:
+        msg: "PVC with EFS creation was SUCCESSFUL"
+
+    - name: Clean up OCP demo project
+      community.kubernetes.k8s:
+        api_version: v1
+        kind: Namespace
+        name: demo-efs
+        state: absent  
+
+
+
+
+
+

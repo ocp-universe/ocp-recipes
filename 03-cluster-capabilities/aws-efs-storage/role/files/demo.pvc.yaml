@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-test-dyn-efs
+  namespace: demo-efs
+spec:
+  storageClassName: "aws-efs"
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi

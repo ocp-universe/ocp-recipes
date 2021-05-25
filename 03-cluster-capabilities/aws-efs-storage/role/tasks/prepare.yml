@@ -1,0 +1,46 @@
+---
+# Prepare
+
+# Add repo to upgrade ansible
+
+- name: Working directories created
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ ocp_tmp_dir }}"
+
+- name: AWS credentials
+  block:
+  - name: CR sent
+    k8s:
+      state: present
+      definition: "{{ lookup( 'template', './templates/cr.yaml.j2' ) }}"
+
+  - name: Wait until Secret is created
+    k8s_facts:
+      api_version: v1
+      kind: Secret
+      name: "{{ secret_name }}"
+      namespace: "{{ namespace }}"
+    register: r_csv
+    retries: 15
+    delay: 5
+    until:
+    - r_csv.resources[0].data is defined
+
+  - name: Retrieve credentials from Secret
+    k8s_facts:
+      api_version: v1
+      kind: Secret
+      name: "{{ secret_name }}"
+      namespace: "{{ namespace }}"
+    register: ctx
+
+  - name: Set up ocp_recipe_operator combined dictionary
+    set_fact:
+      AWS_ACCESS_KEY: >-
+        {{ ctx.data.aws_access_key_id | b64decode }}
+      AWS_SECRET_KEY: >-
+        {{ ctx.data.aws_secret_access_key | b64decode }}

@@ -1,0 +1,39 @@
+# Web-Terminal
+#
+# Using Tekton and ansible-runner
+---
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: aws-efs-task-run-{{ randAlphaNum 5 | lower }}
+  namespace: {{ .Values.namespace | quote }}
+  annotations:
+      rollme: {{ randAlphaNum 5 | quote }}
+spec:
+  taskRef:
+    name: k8s-swiss-with-clone
+  params:
+    # ansible-runner parameters
+    - name: project-dir
+      value: {{ .Values.project_dir | quote }}
+    - name: args
+      value:
+      - '-p main.yml'
+      - '--project-dir {{ .Values.project_dir }}'
+      #- '--project-dir "web-terminal"'
+    - name: largs
+      #value: '-p main.yml --project-dir {{ .Values.project_dir }}'     
+      value: '-i localhost ./main.yml -e"silent=False" -e"ACTION=create" -vvv'     
+    # git-clone parameters
+    - name: url
+      value: {{ .Values.repo.url | quote }}
+    - name: revision
+      value: {{ .Values.repo.revision | quote }}
+    - name: sslVerify
+      value: "false"       
+  workspaces:
+    - name: runner-dir
+      emptyDir: {}
+  podTemplate:
+    securityContext:
+      runAsUser: 0

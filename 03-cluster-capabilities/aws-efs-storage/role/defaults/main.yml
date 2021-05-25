@@ -1,0 +1,13 @@
+---
+
+ocp_tmp_dir: /tmp/ocp/efs
+
+# #############################################
+
+# common vars
+ocp_config_type: ocp-infra
+ocp_config_pattern_name: ocp-aws-efs
+
+namespace: gitops-config
+secret_name: custom-aws-efs-credentials
+

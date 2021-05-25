@@ -1,0 +1,61 @@
+# OpenShift installation on AWS
+- hosts: all
+  vars_files:
+    - ../defaults/main.yml
+    - ../vars/main.yml
+    - ../vars/vars.yml
+  vars:
+    requirements_path: "requirements.yml"
+    aws:
+      region: "{{ aws_region }}"
+  handlers:
+  - import_tasks: ../handlers/main.yml
+  environment:
+#    KUBECONFIG: /tmp/ocp/gen/auth/kubeconfig    
+#    AWS_ACCESS_KEY: "{{ aws_access_key_id }}"
+#    AWS_SECRET_KEY: "{{ aws_secret_access_key }}"
+    #ANSIBLE_COLLECTIONS_PATHS: "~/.ansible/collections/ansible_collections:~/.ansible/collections"
+
+  collections:
+    - community.kubernetes
+    
+  tasks:
+  - name: Running prepare tasks
+    include_tasks:
+      file: ./prepare.yml
+    when: 
+    - ACT is defined
+
+  - name: Prepare ansible roles
+    include_tasks:
+      file: ./prepare_ansible.yml
+    when: 
+    - ACT is defined
+    
+  - name: Running task for EFS provisioning
+    block:  
+    - name: Running AWS tasks
+      include_tasks:
+        file: ./aws.yml
+      when: 
+      - ACT is defined
+    
+    - name: Debug Filesystem ID
+      debug:
+        msg: "{{ cf_stack.stack_outputs.FileSystemId }}"
+
+    - name: Running Helm to install EFS in OCP tasks
+      include_tasks:
+        file: ./ocp_efs.yml
+      when: 
+      - ACT is defined
+
+    
+  - name: Running cleanup tasks
+    include_tasks:
+      file: ./cleanup.yml
+
+  
+  
+      
+      

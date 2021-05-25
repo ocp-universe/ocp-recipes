@@ -1,0 +1,9 @@
+---
+# Clean up tasks
+
+
+- name: Roles recursively remove directory (local)
+  local_action:
+    module: file
+    path: "{{ ocp_tmp_dir }}"
+    state: absent

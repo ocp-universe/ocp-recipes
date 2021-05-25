@@ -1,0 +1,65 @@
+= OpenShift Recipes: AWS EFS Storage
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Configure AWS EFS Storage for an OpenShift cluster.
+
+toc::[]
+
+== Overview
+
+Creates in an AWS account EFS and configures the OpenShift cluster for using it as dynamic storage provisioning.
+
+|===
+| Title | AWS EFS Storage
+| Status | In testing 
+| Deploy Model | Ansible
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
+== Action
+
+=== Deploy
+
+----
+ansible-playbook -i localhost ./main.yml \
+    -e"silent=False" \
+    -e"ACTION=create"
+----
+
+
+=== Remove
+
+----
+ansible-playbook -i localhost ./main.yml \
+    -e"silent=False" \
+    -e"ACTION=remove"
+----
+
+== Summary
+
+Red Hat Fuse / Fuse Online is installed.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

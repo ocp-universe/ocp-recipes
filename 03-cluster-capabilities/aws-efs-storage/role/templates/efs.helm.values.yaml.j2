@@ -1,0 +1,7 @@
+efsProvisioner:
+ awsRegion: {{ aws_region }}
+ efsFileSystemId: {{ cf_stack.stack_outputs.FileSystemId }}
+ path: {{ aws_efs_access_point }}
+ provisionerName: {{ k8s_efs_provisioner_name }}
+ storageClass:
+  isDefault: {{ k8s_efs_default }}

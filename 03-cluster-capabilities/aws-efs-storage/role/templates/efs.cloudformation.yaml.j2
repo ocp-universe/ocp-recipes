@@ -1,0 +1,137 @@
+# AWS Cloudformation template to create and configure EFS
+# purpose is to use this EFS with OpenShift
+# for this reason the configuration allows to access and usage of 
+# the created EFS from the OpenShift (kube) nodes
+
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Create EFS file system and allow access from dedicated network/security group"
+
+Parameters:
+  VPC:
+    Type: String
+    Description: The VPC identity
+    Default: "{{ vpc_ids[0] }}"
+
+#  SubnetID1:
+#    Type: String
+#    Description: The subnet where to launch the service
+#    Default: subnet-ID
+
+  EFSName:
+    Type: String
+    Description: EFS name
+    Default: "OCPDynFS"
+
+  EFSPerformanceMode:
+    Type: String
+    Description: EFS performance mode
+    AllowedValues:
+      - "generalPurpose"
+      - "maxIO"
+    Default: "generalPurpose"
+
+  EFSThroughputMode:
+    Type: String
+    Description: EFS throughput mode
+    AllowedValues:
+      - "bursting"
+      - "provisioned"
+    Default: "bursting"  
+
+  EFSAccessPoint:
+    Type: String
+    Description: Access point on the filesystem
+    Default: "{{ aws_efs_access_point }}"
+
+Metadata:
+  Authors:
+    Description:  Hafid Haddouti (code (at) haddouti (dot) com)
+  Purpose:
+    Description: "This template is used to create one EFS filesystem, mount target and adjust the VPC security groups
+                  associated with the mount target."
+  License:
+    Description: 'Copyright 2020 Hafid Haddouti
+                  Licensed under the Apache License, Version 2.0 (the "License");
+                  you may not use this file except in compliance with the License.
+                  You may obtain a copy of the License at
+                      http://www.apache.org/licenses/LICENSE-2.0
+                  Unless required by applicable law or agreed to in writing, software
+                  distributed under the License is distributed on an "AS IS" BASIS,
+                  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                  See the License for the specific language governing permissions and
+                  limitations under the License.'
+
+
+Resources:
+  EFSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "security group for the prod EFS"
+      GroupName: "demo-efs-sg"
+      VpcId: !Ref VPC
+      SecurityGroupIngress: 
+        - Description: "Inbound: nodes to efs"
+          IpProtocol: "tcp"
+          FromPort: 2049
+          ToPort: 2049
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: demo-efs-sg
+        - Key: Environment
+          Value: demo
+        - Key: Project
+          Value: !Ref EFSName            
+
+  EFSFileSystem:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      BackupPolicy:
+        Status: ENABLED
+      Encrypted: false
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_60_DAYS
+      PerformanceMode: !Ref EFSPerformanceMode
+      ThroughputMode: !Ref EFSThroughputMode
+      FileSystemTags: 
+        - Key: Name
+          Value: demo-vpc-efs-ocp              
+        - Key: Environment
+          Value: demo              
+        - Key: Project
+          Value: !Ref EFSName
+
+# repeat for all existing subnets
+{% for subnetId in vpc_subnet_ids %}
+  MountTarget{{ loop.index }}:
+    Type: AWS::EFS::MountTarget
+    Properties: 
+      FileSystemId: !Ref EFSFileSystem
+      #IpAddress: *.*.*.*
+      SecurityGroups: 
+        - !Ref EFSSecurityGroup
+      SubnetId: "{{ subnetId }}"
+
+{% endfor %}
+
+  AccessPointResource:
+    Type: 'AWS::EFS::AccessPoint'
+    Properties:
+      FileSystemId: !Ref EFSFileSystem          
+      RootDirectory:           
+        Path: !Ref EFSAccessPoint
+
+
+Outputs:
+  EFS:
+    Description: The created EFS 
+    Value: !Ref EFSFileSystem
+
+  FileSystemId:
+    Description: The FileSystem ID 
+    Value: !Ref EFSFileSystem
+    Export:
+      Name: !Sub '${AWS::StackName}FileSystemId'
+
+
+ 
