@@ -41,6 +41,6 @@
   - name: Set up ocp_recipe_operator combined dictionary
     set_fact:
       AWS_ACCESS_KEY: >-
-        {{ ctx.data.aws_access_key_id | b64decode }}
+        {{ ctx.resources[0].data.aws_access_key_id | b64decode }}
       AWS_SECRET_KEY: >-
-        {{ ctx.data.aws_secret_access_key | b64decode }}
+        {{ ctx.resources[0].data.aws_secret_access_key | b64decode }}
