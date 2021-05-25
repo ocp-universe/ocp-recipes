@@ -259,7 +259,8 @@ spec:
 
         cd $(params.project-dir)
         #ansible-playbook --list-tasks main.yml
-        ansible-playbook -i localhost ./main.yml -e"silent=False" -e"ACTION=create"
+        #ansible-playbook -i localhost ./main.yml -e"silent=False" -e"ACTION=create"
+        ansible-playbook $(params.largs)
 
       workingDir: '$(workspaces.runner-dir.path)'
 
@@ -272,7 +273,7 @@ spec:
         #!/bin/sh
 
         exit 0
-        
+
         #export COLLECTIONS_PATHS="/tekton/home/.ansible/collections/ansible_collections"
         entrypoint ansible-runner $(params.largs) run $(params.project-dir) 
 
