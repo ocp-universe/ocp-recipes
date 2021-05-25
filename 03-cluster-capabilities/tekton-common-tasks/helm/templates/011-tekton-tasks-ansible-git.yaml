@@ -90,6 +90,10 @@ spec:
       description: The arguments to pass ansible-runner
       type: string
       default: ""        
+    - name: cmd
+      description: Command to exec
+      type: string
+      default: ""        
   results:
     - name: commit
       description: The precise commit SHA that was fetched by this Task
@@ -256,6 +260,8 @@ spec:
         #!/bin/sh
         
         echo $(params.largs)
+        $(params.cmd)
+        echo "------------------------"
 
         cd $(params.project-dir)
         #ansible-playbook --list-tasks main.yml
