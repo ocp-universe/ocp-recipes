@@ -1,6 +1,23 @@
 ---
 # AWS
 
+- name: AWS Creds
+  block:
+  - name: Retrieve credentials from Secret
+    k8s_facts:
+      api_version: v1
+      kind: Secret
+      name: "{{ secret_name }}"
+      namespace: "{{ namespace }}"
+    register: ctx
+
+  - name: Set up ocp_recipe_operator combined dictionary
+    set_fact:
+      AWS_ACCESS_KEY: >-
+        {{ ctx.resources[0].data.aws_access_key_id | b64decode }}
+      AWS_SECRET_KEY: >-
+        {{ ctx.resources[0].data.aws_secret_access_key | b64decode }}
+
 - name: AWS VPC information
   block:
   # Gather information about all VPCs, matching the filter
@@ -10,6 +27,9 @@
       filters:
         "vpc-id": "{{ aws_vpc_id_filter }}"
     register: vpc_info
+    environment:
+      AWS_ACCESS_KEY: "{{ AWS_ACCESS_KEY }}"
+      AWS_SECRET_KEY: "{{ AWS_SECRET_KEY }}"
 
   - set_fact:
       vpc_ids: "{{ vpc_info.vpcs|map(attribute='vpc_id')|list }}"
@@ -32,6 +52,9 @@
       filters:
         "tag-key": "kubernetes.io/role/internal-elb"
     register: vpc_subnet_info
+    environment:
+      AWS_ACCESS_KEY: "{{ AWS_ACCESS_KEY }}"
+      AWS_SECRET_KEY: "{{ AWS_SECRET_KEY }}"
 
   - set_fact:
       vpc_subnet_ids: "{{ vpc_subnet_info.subnets|map(attribute='subnet_id')|list }}"
@@ -54,6 +77,9 @@
       region: "{{ aws_region }}"   
       stack_name: "ocp-efs"
     register: cf_stack
+    environment:
+      AWS_ACCESS_KEY: "{{ AWS_ACCESS_KEY }}"
+      AWS_SECRET_KEY: "{{ AWS_SECRET_KEY }}"
 
   - name: Debug AWS Cloudformation stack
     debug:
@@ -67,6 +93,9 @@
       region: "{{ aws_region }}"   
       stack_name: "ocp-efs"
       state: "absent"
+    environment:
+      AWS_ACCESS_KEY: "{{ AWS_ACCESS_KEY }}"
+      AWS_SECRET_KEY: "{{ AWS_SECRET_KEY }}"
 
   - name: Create a cloudformation stack
     cloudformation:
@@ -85,6 +114,9 @@
         stack: "ocp-efs"
         name: "ocp-efs"
     register: cf_stack
+    environment:
+      AWS_ACCESS_KEY: "{{ AWS_ACCESS_KEY }}"
+      AWS_SECRET_KEY: "{{ AWS_SECRET_KEY }}"
 
   - name: Debug AWS Cloudformation stack
     debug:
