@@ -18,6 +18,10 @@
       AWS_SECRET_KEY: >-
         {{ ctx.resources[0].data.aws_secret_access_key | b64decode }}
 
+  - name: Display AWS Key
+    debug:
+      msg: "{{ AWS_ACCESS_KEY }}"
+
 - name: AWS VPC information
   block:
   # Gather information about all VPCs, matching the filter
