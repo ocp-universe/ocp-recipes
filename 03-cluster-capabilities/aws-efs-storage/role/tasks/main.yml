@@ -4,13 +4,13 @@
   include_tasks:
     file: ./prepare.yml
   when: 
-  - ACT is defined
+  - ACTION is defined
 
 - name: Prepare ansible roles
   include_tasks:
     file: ./prepare_ansible.yml
   when: 
-  - ACT is defined
+  - ACTION is defined
   
 - name: Running task for EFS provisioning
   block:  
@@ -18,7 +18,7 @@
     include_tasks:
       file: ./aws.yml
     when: 
-    - ACT is defined
+    - ACTION is defined
   
   - name: Debug Filesystem ID
     debug:
@@ -28,7 +28,7 @@
     include_tasks:
       file: ./ocp_efs.yml
     when: 
-    - ACT is defined
+    - ACTION is defined
 
   
 - name: Running cleanup tasks
