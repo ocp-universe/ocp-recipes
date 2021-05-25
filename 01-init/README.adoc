@@ -20,14 +20,24 @@ The latest version use the new feature base on link:https://argocd-applicationse
 
 == Installation
 
-Install as follow
+Install as follow - execute the script twice with a short wait period between both executions.
+This is currently the simplest solution to install the base operator (here: OpenShift GitOps), wait that the operator is done before apply the ArgoCD configuration.
+An alternative could be Ansible or similar - but this would increase the technology entry barrier.
 
 ----
 $ git clone https://github.com/ocp-universe/ocp-recipes
 $ oc apply -k 01-init/kustomize
-appproject.argoproj.io/argocd-bootstrap-project created
-application.argoproj.io/00-argocd-bootstrap-config created
+namespace/openshift-gitops created
 subscription.operators.coreos.com/openshift-gitops-operator created
+unable to recognize "01-init/kustomize": no matches for kind "AppProject" in version "argoproj.io/v1alpha1"
+unable to recognize "01-init/kustomize": no matches for kind "ApplicationSet" in version "argoproj.io/v1alpha1"
+
+
+$ oc apply -k 01-init/kustomize
+namespace/openshift-gitops unchanged
+appproject.argoproj.io/argocd-bootstrap-project created
+applicationset.argoproj.io/argocd-bootstrap-set created
+subscription.operators.coreos.com/openshift-gitops-operator unchanged
 ----
 
 Wait for that ArgoCD to be installed. The installation process also deploys an ArgoCD Application which links the link:../02-cluster-config[Cluster Config]. 
