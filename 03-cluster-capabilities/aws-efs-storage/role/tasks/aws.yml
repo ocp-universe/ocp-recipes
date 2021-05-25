@@ -6,6 +6,7 @@
   # Gather information about all VPCs, matching the filter
   - name: Gather all VPC
     ec2_vpc_net_info:
+      region: "{{ aws_region }}"
       filters:
         "vpc-id": "{{ aws_vpc_id_filter }}"
     register: vpc_info
@@ -26,7 +27,8 @@
   # Thru the OpenShift installation the private subnets contains the tag
   # kubernetes.io/role/internal-elb
   - name: Gather all subnets
-    ec2_vpc_subnet_info:      
+    ec2_vpc_subnet_info:   
+      region: "{{ aws_region }}"   
       filters:
         "tag-key": "kubernetes.io/role/internal-elb"
     register: vpc_subnet_info
@@ -49,6 +51,7 @@
 
   - name: Get AWS Cloudformation stack
     cloudformation_info:
+      region: "{{ aws_region }}"   
       stack_name: "ocp-efs"
     register: cf_stack
 
@@ -61,6 +64,7 @@
       - cf_stack.cloudformation["ocp-efs"] is defined
       - cf_stack.cloudformation["ocp-efs"].stack_description.stack_status == "CREATE_FAILED"
     cloudformation:
+      region: "{{ aws_region }}"   
       stack_name: "ocp-efs"
       state: "absent"
 
