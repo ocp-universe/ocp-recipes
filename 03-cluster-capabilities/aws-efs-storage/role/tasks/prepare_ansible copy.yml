@@ -1,0 +1,38 @@
+---
+# Prepare Ansible
+
+- name: Prepare Ansible roles
+  block:  
+  - name: Copy requirements file
+    copy:
+      src: "{{ requirements_path }}"
+      dest: "{{ ocp_tmp_dir }}/{{ requirements_path }}"
+
+  #- name: Import Ansible collection from requirement file
+  #  command: >-
+  #    ansible-galaxy collection install -r {{ ocp_tmp_dir }}/{{ requirements_path }}
+
+  # does not work with pip3, using wrong option -r
+  #- name: Install packages related to ansible collection
+  #  pip:
+  #    requirements: "{{ ocp_tmp_dir }}/{{ requirements_path }}"
+  # ...alternative install the packages directly
+  # amazon.aws: boto, boto3, botocore
+  # community.kubernetes: openshift
+  - name: Install packages related to ansible collection
+    become: true
+    pip:
+      name: "{{ item }}"
+    loop:
+    - boto 
+    - boto3 
+    - botocore
+    - openshift
+
+- name: Install Helm - for Ansible
+  block:
+  - name: Install Helm
+    shell: |
+      curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+      chmod 700 get_helm.sh
+      ./get_helm.sh
