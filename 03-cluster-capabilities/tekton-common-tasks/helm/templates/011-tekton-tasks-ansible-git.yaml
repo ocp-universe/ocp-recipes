@@ -256,10 +256,11 @@ spec:
         #!/bin/sh
         
         echo $(params.largs)
-        
+
         cd $(params.project-dir)
         #ansible-playbook --list-tasks main.yml
         #ansible-playbook -i localhost ./main.yml -e"silent=False" -e"ACTION=create"
+        export COLLECTIONS_PATHS="/tekton/home/.ansible/collections/ansible_collections"
         ansible-playbook $(params.largs)
 
       workingDir: '$(workspaces.runner-dir.path)'
