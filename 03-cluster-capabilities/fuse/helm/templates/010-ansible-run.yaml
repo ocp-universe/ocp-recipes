@@ -11,7 +11,7 @@ metadata:
       rollme: {{ randAlphaNum 5 | quote }}
 spec:
   taskRef:
-    name: ansible-runner-with-clone
+    name: k8s-swiss-with-clone
   params:
     # ansible-runner parameters
     - name: project-dir
@@ -22,7 +22,8 @@ spec:
       - '--project-dir {{ .Values.project_dir }}'
       #- '--project-dir "web-terminal"'
     - name: largs
-      value: '-p main.yml --project-dir {{ .Values.project_dir }}'     
+      #value: '-p main.yml --project-dir {{ .Values.project_dir }}'     
+      value: '-i localhost ./main.yml -e"silent=False" -e"ACTION=create" -vvv'     
     # git-clone parameters
     - name: url
       value: {{ .Values.repo.url | quote }}
