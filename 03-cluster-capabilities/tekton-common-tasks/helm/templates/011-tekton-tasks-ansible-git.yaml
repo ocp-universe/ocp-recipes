@@ -229,8 +229,6 @@ spec:
         #!/bin/sh
                 
         oc get pods -n gitops-config
-
-        oc adm create-api-client-config
         
       workingDir: '$(workspaces.runner-dir.path)'
 
