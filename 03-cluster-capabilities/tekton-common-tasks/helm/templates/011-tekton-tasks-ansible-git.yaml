@@ -215,6 +215,8 @@ spec:
         ls -l ${WORKSPACE_OUTPUT_PATH}/$(params.project-dir)
         echo "-------------------"
         ls -l /var/run/secrets/kubernetes.io/serviceaccount
+        echo "-------------------"
+        cat /var/run/secrets/kubernetes.io/serviceaccount/token
         
       workingDir: '$(workspaces.runner-dir.path)'
 
