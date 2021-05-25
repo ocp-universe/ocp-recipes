@@ -264,8 +264,25 @@ spec:
         echo "------------------------"
 
         cd $(params.project-dir)
+
         #ansible-playbook --list-tasks main.yml
         #ansible-playbook -i localhost ./main.yml -e"silent=False" -e"ACTION=create"
+        
+        if [ -f requirements.txt ];
+        then
+          pip3 install --user \
+            -r requirements.txt
+        fi
+
+        if [ -f  requirements.yml ];
+        then
+          ansible-galaxy role install -vv \
+            -r requirements.yml
+          ansible-galaxy collection install -vv \
+            -r requirements.yml
+        fi
+        
+        
         export COLLECTIONS_PATHS="/tekton/home/.ansible/collections/ansible_collections"
         ansible-playbook $(params.largs)
 
