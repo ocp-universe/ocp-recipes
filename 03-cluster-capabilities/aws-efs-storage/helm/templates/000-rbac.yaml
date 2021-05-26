@@ -67,7 +67,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: argocd-aws-efs
-  namespace: openshift-gitops
+  namespace: gitops-config
 subjects:
 - kind: ServiceAccount
   name: openshift-gitops-argocd-application-controller
