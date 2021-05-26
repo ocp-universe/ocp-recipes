@@ -23,6 +23,7 @@ rules:
   resources: ["credentialsrequests"]
   verbs: ["create", "update", "patch", "delete"]
 ---
+# RoleBinding to get the credentials
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -36,3 +37,18 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: cloudcredential-role
+---
+# RoleBinding in default namespace where the efs-provisioner will be installed
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-cr-edit
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: edit
