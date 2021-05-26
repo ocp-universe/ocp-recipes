@@ -40,10 +40,10 @@ roleRef:
 ---
 # RoleBinding in default namespace where the efs-provisioner will be installed
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
   name: aws-efs-role
-  #namespace: default
+  namespace: default
 rules:
 - apiGroups: ["policy"]
   resources: ["podsecuritypolicies"]
@@ -60,7 +60,7 @@ subjects:
   namespace: openshift-gitops
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
+  kind: Role
   name: aws-efs-role
 ---
 apiVersion: rbac.authorization.k8s.io/v1
