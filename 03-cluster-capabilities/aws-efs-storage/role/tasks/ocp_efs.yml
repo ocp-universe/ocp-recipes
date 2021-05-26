@@ -18,14 +18,14 @@
     - name: Delete Helm efs-provisioner release 
       community.kubernetes.helm:
         name: efs-provisioner
-        release_namespace: default
+        release_namespace: "{{ namespace }}"
         release_state: absent
 
     - name: Install helm efs-provisioner chart
       community.kubernetes.helm:
         name: efs-provisioner
         chart_ref: stable/efs-provisioner
-        release_namespace: default
+        release_namespace: "{{ namespace }}"
         # delete on failure
         atomic: yes
         values: "{{ lookup('template', '../templates/efs.helm.values.yaml.j2') | from_yaml }}"
@@ -39,7 +39,7 @@
     - name: Helm efs-provisioner release status
       community.kubernetes.helm_info:
         name: efs-provisioner
-        release_namespace: default
+        release_namespace: "{{ namespace }}"
       register: helm_info_efs
     
     - name: Debug Helm EFS release
