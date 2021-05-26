@@ -92,7 +92,7 @@
   - name: Delete AWS Cloudformation stack if in failed state
     when: 
       - cf_stack.cloudformation["ocp-efs"] is defined
-      - cf_stack.cloudformation["ocp-efs"].stack_description.stack_status == "CREATE_FAILED"
+      - (cf_stack.cloudformation["ocp-efs"].stack_description.stack_status == "CREATE_FAILED" or cf_stack.cloudformation["ocp-efs"].stack_description.stack_status == "ROLLBACK_COMPLETE") 
     cloudformation:
       region: "{{ aws_region }}"   
       stack_name: "ocp-efs"
