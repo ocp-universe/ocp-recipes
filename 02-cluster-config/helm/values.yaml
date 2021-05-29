@@ -38,4 +38,19 @@ argocd:
         jsonPointers:
         - /metadata/labels
         - /metadata/annotations
+    - name: service-mesh
+      repo: https://github.com/ocp-universe/ocp-recipes
+      path: 03-cluster-capabilities/servicemesh
+      revision: main
+      namespace: openshift-gitops
+      # optional
+      #server: 
+      project: argocd-bootstrap-project
+      ignores:
+      - group: tekton.dev
+        kind: TaskRun
+        jsonPointers:
+        - /metadata/labels
+        - /metadata/annotations
+    
     
