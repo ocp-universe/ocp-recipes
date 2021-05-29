@@ -11,7 +11,7 @@ toc::[]
 
 == Overview
 
-Installs OpenShift Service Mesh, with all related components.
+Installs Sealed Secret, with all related components.
 
 |===
 | Title | Sealed Secret
