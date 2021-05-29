@@ -8,12 +8,12 @@ USER root
 
 # Install tools needed for your repo-server to retrieve & decrypt secrets, render manifests
 # (e.g. curl, awscli, gpg, sops)
-RUN apt-get update && \
-    apt-get install -y \
+RUN yum update && \
+    yum install -y \
         curl \
         awscli \
         gpg && \
-    apt-get clean && \
+    yum clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install the AVP plugin (as root so we can copy to /usr/local/bin)
