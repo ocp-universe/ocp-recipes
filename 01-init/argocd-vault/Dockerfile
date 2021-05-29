@@ -1,7 +1,7 @@
 # Extends OpenShift GitOps ArgoCD with IBM Vault Plugin
 # https://github.com/IBM/argocd-vault-plugin
 # OpenShift GitOps 4.6/.7
-FROM argoproj/argocd:latest
+FROM argoproj/argocd:v2.0.0
 
 # Switch to root for the ability to perform install
 USER root
