@@ -9,6 +9,8 @@ kind: Subscription
 metadata:
   name: jaeger-product
   namespace: openshift-operators
+  annotations:
+    argocd.argoproj.io/hook: PreSync
 spec:
   channel: 1.20-stable
   installPlanApproval: Automatic
