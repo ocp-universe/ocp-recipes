@@ -1,0 +1,32 @@
+# Operator instances
+# 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: servicemesh-role
+  namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+rules:
+# Permissions to create resources in associated Tasks
+- apiGroups: ["maistra.io"]
+  resources: ["servicemeshcontrolplanes"]
+  verbs: ["create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: servicemesh-role-binding
+  namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: servicemesh-role
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+---

@@ -1,0 +1,45 @@
+# OpenShift Elasticsearch Operator
+# 
+# elasticsearch-operator
+# Version: 4.6.x, channel: 4.6
+#
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: servicemesh-umbrella
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  generators:
+  - list:
+      items:
+        - cname: "ocp-elastic"
+          crepo: https://github.com/ocp-universe/ocp-recipes.git
+          cpath: "03-cluster-capabilities/ocp-elasticsearch/overlays/ocp-4.7"
+          crevision: "main"
+        - cname: "ocp-kiali"
+          crepo: https://github.com/ocp-universe/ocp-recipes.git
+          cpath: "03-cluster-capabilities/kiali/overlays/ocp-4.7"
+          crevision: "main"
+        - cname: "ocp-jaeger"
+          crepo: https://github.com/ocp-universe/ocp-recipes.git
+          cpath: "03-cluster-capabilities/jaeger/overlays/ocp-4.7"
+          crevision: "main"
+  template:
+    metadata:
+      name: '{{cname}}'
+    spec:
+      project: argocd-bootstrap-project
+      source:
+        repoURL: '{{crepo}}'
+        targetRevision: '{{crevision}}'
+        path: '{{cpath}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: openshift-gitops
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

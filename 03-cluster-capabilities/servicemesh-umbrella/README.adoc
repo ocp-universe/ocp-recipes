@@ -1,0 +1,51 @@
+= OpenShift Recipes: Red Hat OpenShift Service Mesh
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Red Hat link:https://www.openshift.com/learn/topics/service-mesh[OpenShift Service Mesh]
+
+toc::[]
+
+== Overview
+
+Installs OpenShift Service Mesh, with all related components.
+
+|===
+| Title | Red Hat OpenShift Service Mesh
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies 
+a| 
+* OpenShift Elasticsearch
+* Jaeger
+* Kiali 
+| OCP Version | >= 4.7
+|===
+
+== Summary
+
+Red Hat Service Mesh is installed.
+
+== References
+
+* OpenShift Service Mesh: link:https://www.openshift.com/learn/topics/service-mesh[]
+* OpenShift Service Mesh 2 - Docu: link:https://docs.openshift.com/container-platform/4.7/service_mesh/v2x/servicemesh-release-notes.html[]
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

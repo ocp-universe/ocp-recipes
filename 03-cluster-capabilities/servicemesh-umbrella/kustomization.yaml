@@ -1,0 +1,20 @@
+# Kustomize: Operator
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+#namespace: openshift-gitops
+#commonLabels:
+#  pipeline: tekton101
+#  deploy: argocd
+
+
+resources:
+#- ocp-elasticsearch/overlays/ocp-4.7/kustomization.yaml
+#- jaeger/overlays/ocp-4.7/kustomization.yaml
+#- kiali/overlays/ocp-4.7/kustomization.yaml
+- 010-prepare.yaml
+- 012-operator.yaml
+- 020-namespace.yaml
+- 021-rbac.yaml
+- 030-instances.yaml
