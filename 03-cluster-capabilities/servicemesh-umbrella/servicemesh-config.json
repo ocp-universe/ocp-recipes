@@ -1,0 +1,56 @@
+[
+  {
+    "name": "ocp-elastic",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/ocp-elasticsearch/overlays/ocp-4.7",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ocp-kiali",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/kiali/overlays/ocp-4.7",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ocp-jaeger",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/jaeger/overlays/ocp-4.7",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  }
+]

@@ -13,29 +13,20 @@ metadata:
     argocd.argoproj.io/sync-wave: "0"
 spec:
   generators:
-  - list:
-      elements:
-        - cname: "ocp-elastic"
-          crepo: https://github.com/ocp-universe/ocp-recipes.git
-          cpath: "03-cluster-capabilities/ocp-elasticsearch/overlays/ocp-4.7"
-          crevision: "main"
-        - cname: "ocp-kiali"
-          crepo: https://github.com/ocp-universe/ocp-recipes.git
-          cpath: "03-cluster-capabilities/kiali/overlays/ocp-4.7"
-          crevision: "main"
-        - cname: "ocp-jaeger"
-          crepo: https://github.com/ocp-universe/ocp-recipes.git
-          cpath: "03-cluster-capabilities/jaeger/overlays/ocp-4.7"
-          crevision: "main"
+  - git:
+      repoURL: https://github.com/ocp-universe/ocp-recipes.git
+      revision: main
+      files:
+      - path: "03-cluster-capabilities/servicemesh-umbrella/servicemesh-config.json"
   template:
     metadata:
-      name: '{{cname}}'
+      name: '{{name}}'
     spec:
       project: argocd-bootstrap-project
       source:
-        repoURL: '{{crepo}}'
-        targetRevision: '{{crevision}}'
-        path: '{{cpath}}'
+        repoURL: '{{repo}}'
+        targetRevision: '{{revision}}'
+        path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: openshift-gitops
