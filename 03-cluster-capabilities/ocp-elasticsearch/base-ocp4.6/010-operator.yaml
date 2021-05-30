@@ -20,11 +20,11 @@ metadata:
   labels:
     operators.coreos.com/elasticsearch-operator.openshift-operators-redhat: ""
 spec:
-  channel: "5.0"
+  channel: "4.6"
   installPlanApproval: Automatic
   name: elasticsearch-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: elasticsearch-operator.5.0.3-6
+  startingCSV: elasticsearch-operator.4.6.0-202104161407.p0
 ---
 

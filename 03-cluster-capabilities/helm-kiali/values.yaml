@@ -1,0 +1,13 @@
+# helm-kiali.
+# 
+
+operator:
+  name: kiali-ossm
+  namespace: openshift-operators
+  channel: stable
+  approval: Automatic
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  version: kiali-operator.v1.24.7
+
+

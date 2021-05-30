@@ -1,0 +1,13 @@
+# Operator instances
+# 
+---
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger-basic
+spec:
+  # https://docs.openshift.com/container-platform/4.7/jaeger/jaeger_install/rhbjaeger-deploying.html
+  # allInOne: in-memory
+  # production: elasticsearch
+  # streaming: needs AMQ/Kafka
+  strategy: production

@@ -2,7 +2,7 @@
   {
     "name": "ocp-elastic",
     "repo": "https://github.com/ocp-universe/ocp-recipes",
-    "path": "03-cluster-capabilities/ocp-elasticsearch/overlays/ocp-4.7",
+    "path": "03-cluster-capabilities/ocp-elasticsearch/base",
     "revision": "main",
     "namespace": "openshift-gitops",
     "project": "argocd-bootstrap-project",
@@ -20,7 +20,7 @@
   {
     "name": "ocp-kiali",
     "repo": "https://github.com/ocp-universe/ocp-recipes",
-    "path": "03-cluster-capabilities/kiali/overlays/ocp-4.7",
+    "path": "03-cluster-capabilities/helm-kiali",
     "revision": "main",
     "namespace": "openshift-gitops",
     "project": "argocd-bootstrap-project",
@@ -38,7 +38,7 @@
   {
     "name": "ocp-jaeger",
     "repo": "https://github.com/ocp-universe/ocp-recipes",
-    "path": "03-cluster-capabilities/jaeger/overlays/ocp-4.7",
+    "path": "03-cluster-capabilities/helm-jaeger",
     "revision": "main",
     "namespace": "openshift-gitops",
     "project": "argocd-bootstrap-project",
