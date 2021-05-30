@@ -1,13 +1,13 @@
 # Instana Agent
 # https://www.instana.com/docs/d33f489fa560778cdfb7f8a2f021ab48/instana-agent-openshift.yaml
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: instana-agent
-  labels:
-    app.kubernetes.io/name: instana-agent
-    app.kubernetes.io/version: 1.2.14
+#---
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: instana-agent
+#  labels:
+#    app.kubernetes.io/name: instana-agent
+#    app.kubernetes.io/version: 1.2.14
 ---
 apiVersion: v1
 kind: ServiceAccount
