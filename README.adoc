@@ -30,8 +30,8 @@ image:static/ocp-recipes.png[]
 
 To prepare your (new) cluster follow only the 2 steps:
 
-* Configure the `cluster-config.json' in link:02-cluster-config[Cluster Config] to select the desired state (and capabilities). Some capability examples are in link:03-cluster-capabilities[Cluster Capabilities], any other repository is how ever possible.
-* Apply the init as stated in the instruction in link:01-init[Init] to install the foundation (ArgoCD and the bootstrap config).
+. Configure the `cluster-config.json` in link:02-cluster-config[Cluster Config] to select the desired state (and capabilities). Some capability examples are in link:03-cluster-capabilities[Cluster Capabilities], any other repository is how ever possible.
+. Apply the init as stated in the instruction in link:01-init[Init] to install the foundation (ArgoCD and the bootstrap config).
 
 == Summary
 
