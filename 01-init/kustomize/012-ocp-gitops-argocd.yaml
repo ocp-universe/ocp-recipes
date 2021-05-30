@@ -7,6 +7,8 @@
 # - Enable Prometheus with Route
 # - Register repos and credentials
 # - Enhance health check for Ingress
+#
+# ArgoCD with Vault Plugin
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
@@ -16,6 +18,7 @@ metadata:
   labels:
     workspace: demo
 spec:
+  image: openshift-gitops/argo-vault:latest
   controller:
     # Change app-resync, default is 3min
     appSync: 1m
@@ -27,6 +30,8 @@ spec:
 #    image: quay.io/redhat-cop/dex
 #    openShiftOAuth: true
 #    version: v2.22.0-openshift
+  dex:
+    openShiftOAuth: true
   rbac:
     #defaultPolicy: 'role:readonly'
     policy: |
@@ -55,7 +60,6 @@ spec:
       clusters:
       - '*'
       kinds:
-      - TaskRun
       - PipelineRun
 #  repositoryCredentials: '*'
   # Enhance health check for Ingress and PVC
@@ -81,3 +85,16 @@ spec:
           hs.status = "Healthy"
           hs.message = "Controller doesn't report resource status"
           return hs
+  configManagementPlugins: |
+    - name: argocd-vault-plugin
+      generate:
+        command: ["argocd-vault-plugin"]
+        args: ["generate", "./"]
+    - name: argocd-vault-plugin-helm
+      generate:
+        command: ["sh", "-c"]
+        args: ["helm template . > all.yaml && argocd-vault-plugin generate all.yaml"]
+    - name: argocd-vault-plugin-kustomize
+      generate:
+        command: ["sh", "-c"]
+        args: ["kustomize build . > all.yaml && argocd-vault-plugin generate all.yaml"]

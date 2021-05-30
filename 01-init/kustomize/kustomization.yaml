@@ -11,10 +11,10 @@ kind: Kustomization
 
 resources:
 - 000-common.yaml
-- 010-ocp-gitops-operator-ocp4.6.yaml
-#- 010-ocp-gitops-operator-ocp4.7.yaml
+#- 010-ocp-gitops-operator-ocp4.6.yaml
+- 010-ocp-gitops-operator-ocp4.7.yaml
 #- 012-ocp-gitops-argocd.yaml
-#- 020-ocp-gitops-bootstrap.yaml
 - 020-ocp-gitops-applicationset.yaml
+#- 020-ocp-gitops-bootstrap.yaml
 #- 011-ocp-gitops-service.yaml
 #- 020-ocp-gitops.yaml
