@@ -1,4 +1,4 @@
-= OpenShift Recipes: Red Hat 
+= OpenShift Recipes: Red Hat OpenShift Application Data Protection Operator
 :author: Hafid Haddouti
 :toc: macro
 :toclevels: 4
