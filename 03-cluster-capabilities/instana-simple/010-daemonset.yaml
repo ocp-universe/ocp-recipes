@@ -1,0 +1,64 @@
+# Red Hat Advanced Cluster Management
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: instana-agent
+  namespace: instana-agent
+  labels:
+    app.kubernetes.io/name: instana-agent
+    app.kubernetes.io/version: 1.2.14
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: instana-agent
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: instana-agent
+        app.kubernetes.io/version: 1.2.14
+        instana/agent-mode: "APM"
+      annotations: {}
+    spec:
+      serviceAccountName: instana-agent
+      hostIPC: true
+      hostNetwork: true
+      hostPID: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name: instana-agent
+          image: "instana/agent:latest"
+          imagePullPolicy: Always
+          env:
+            - name: INSTANA_AGENT_LEADER_ELECTOR_PORT
+              value: "42655"
+            - name: INSTANA_ZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: instana-agent-cm
+                  key: agent_zone
+            - name: INSTANA_KUBERNETES_CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: instana-agent-cm
+                  key: cluster_name
+            - name: INSTANA_AGENT_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: instana-agent-cm
+                  key: agent_endpoint
+            - name: INSTANA_AGENT_ENDPOINT_PORT              
+              valueFrom:
+                configMapKeyRef:
+                  name: instana-agent-cm
+                  key: agent_endpoint_port
+            - name: INSTANA_AGENT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: instana-agent-cm
+                  key: key
+

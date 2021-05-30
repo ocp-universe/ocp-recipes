@@ -1,0 +1,95 @@
+= OpenShift Recipes: Instana
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Instana, with Kustomize
+
+toc::[]
+
+== Overview
+
+Deploys link:https://www.instana.com/[Instana], a cloud monitoring solution
+
+|===
+| Title | Instana
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.6
+|===
+
+== Preparation
+
+The Instana expects a `ConfigMap` and `Secret` with details about endpoint, port and API key. An example could be
+
+[source,yaml]
+----
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: instana-agent
+  labels:
+    app.kubernetes.io/name: instana-agent
+    app.kubernetes.io/version: 1.2.14
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: instana-agent-cm
+  namespace: instana-agent
+  labels:
+    app.kubernetes.io/name: instana-agent
+    app.kubernetes.io/version: 1.2.14
+type: Opaque
+stringData:
+  key: '---your-key---' 
+  downloadKey: ''
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: instana-agent-cm
+  namespace: instana-agent
+  labels:
+    app.kubernetes.io/name: instana-agent
+    app.kubernetes.io/version: 1.2.14
+data:
+  cluster_name: '---your-cluster-name---'
+  agent_endpoint: '--your-url.instana.io'
+  agent_endpoint_port: '443'
+  agent_zone: '--your-zone--'
+----
+
+== Action
+
+----
+$ oc apply -k .
+----
+
+== Summary
+
+Instana installed.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.
