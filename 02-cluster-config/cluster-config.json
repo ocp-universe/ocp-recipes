@@ -72,6 +72,24 @@
     ]
   },
   {
+    "name": "instana-agent",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/instana-simple",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
     "name": "rh-servicemesh",
     "repo": "https://github.com/ocp-universe/ocp-recipes",
     "path": "03-cluster-capabilities/servicemesh-umbrella",
