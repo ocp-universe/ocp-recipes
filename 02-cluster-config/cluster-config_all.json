@@ -36,9 +36,63 @@
     ]
   },
   {
+    "name": "service-mesh",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/servicemesh",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
     "name": "rhacm-simple",
     "repo": "https://github.com/ocp-universe/ocp-recipes",
     "path": "03-cluster-capabilities/rhacm-simple",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "fuse",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/fuse/helm",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "aws-efs",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/aws-efs-storage/helm",
     "revision": "main",
     "namespace": "openshift-gitops",
     "project": "argocd-bootstrap-project",
