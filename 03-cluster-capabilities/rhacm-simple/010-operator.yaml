@@ -6,12 +6,16 @@ metadata:
   name: open-cluster-management
   labels:
     openshift.io/cluster-monitoring: "true"
+  annotations:
+    argocd.argoproj.io/hook: Sync
 ---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: advanced-cluster-management
   namespace: open-cluster-management
+  annotations:
+    argocd.argoproj.io/hook: Sync
 spec:
   targetNamespaces:
   - open-cluster-management
@@ -21,6 +25,8 @@ kind: Subscription
 metadata: 
   name: advanced-cluster-management
   namespace: open-cluster-management
+  annotations:
+    argocd.argoproj.io/hook: Sync
 spec:  
   channel: release-2.2
   installPlanApproval: Automatic
