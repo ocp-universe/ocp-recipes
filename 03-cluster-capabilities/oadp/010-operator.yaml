@@ -1,0 +1,31 @@
+# Red Hat OADP
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: oadp-operator
+  labels:
+    openshift.io/cluster-monitoring: "true"
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: oadp-operator
+  namespace: oadp-operator
+spec:
+  targetNamespaces:
+  - oadp-operator
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata: 
+  name: oadp-operator
+  namespace: oadp-operator
+spec:  
+  channel: alpha
+  installPlanApproval: Automatic
+  name: oadp-operator
+  source: community-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: oadp-operator.v0.2.3
+

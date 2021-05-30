@@ -1,0 +1,5 @@
+# Instance
+# Consider to use PostSync
+#annotations:
+#    argocd.argoproj.io/hook: PostSync
+---
