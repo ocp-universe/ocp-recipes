@@ -5,6 +5,6 @@ kind: MultiClusterHub
 metadata:
   namespace: open-cluster-management
   name: multiclusterhub
-  annotations:
-    argocd.argoproj.io/hook: PostSync
+#  annotations:
+#    argocd.argoproj.io/hook: PostSync
 spec: {}
