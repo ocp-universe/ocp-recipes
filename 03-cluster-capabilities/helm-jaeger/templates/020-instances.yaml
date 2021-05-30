@@ -10,4 +10,4 @@ spec:
   # allInOne: in-memory
   # production: elasticsearch
   # streaming: needs AMQ/Kafka
-  strategy: production
+  strategy: allinone
