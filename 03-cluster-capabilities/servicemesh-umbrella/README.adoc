@@ -19,9 +19,9 @@ Installs OpenShift Service Mesh, with all related components.
 | Deploy Model | kustomize
 | Dependencies 
 a| 
-* OpenShift Elasticsearch
-* Jaeger
-* Kiali 
+* link:../ocp-elasticsearch[OpenShift Elasticsearch]
+* link:../helm-jaeger[Jaeger]
+* link:../helm-kiali[Kiali]
 | OCP Version | >= 4.7
 |===
 
