@@ -1,0 +1,17 @@
+# Red Hat Project Governance
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prj-one
+  labels:
+    openshift.io/cluster-monitoring: "true"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prj-two
+  labels:
+    openshift.io/cluster-monitoring: "true"
+
+
