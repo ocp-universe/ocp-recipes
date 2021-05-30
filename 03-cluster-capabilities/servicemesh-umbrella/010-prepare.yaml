@@ -10,6 +10,7 @@ metadata:
   name: servicemesh-umbrella
   namespace: openshift-gitops
   annotations:
+    argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/sync-wave: "0"
 spec:
   generators:
