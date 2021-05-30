@@ -17,7 +17,7 @@ Installs Red Hat Kiali operator, the community version is not supported.
 |===
 | Title | Red Hat Kiali
 | Status | In testing 
-| Deploy Model | kustomize
+| Deploy Model | helm
 | Dependencies | n/a
 | OCP Version | >= 4.6
 |===

@@ -16,7 +16,7 @@ Installs Red Hat Jaeger operator, the community version is not supported.
 |===
 | Title | Red Hat Jaeger
 | Status | In testing 
-| Deploy Model | kustomize
+| Deploy Model | helm
 | Dependencies | n/a
 | OCP Version | >= 4.6
 |===
