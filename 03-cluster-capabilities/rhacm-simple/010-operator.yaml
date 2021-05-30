@@ -8,6 +8,7 @@ metadata:
     openshift.io/cluster-monitoring: "true"
   annotations:
     argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "-2"
 ---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
@@ -16,6 +17,7 @@ metadata:
   namespace: open-cluster-management
   annotations:
     argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   targetNamespaces:
   - open-cluster-management
@@ -27,6 +29,7 @@ metadata:
   namespace: open-cluster-management
   annotations:
     argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "0"
 spec:  
   channel: release-2.2
   installPlanApproval: Automatic
