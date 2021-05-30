@@ -11,10 +11,11 @@ toc::[]
 
 == Overview
 
-Deploys link:https://www.instana.com/[Instana], a cloud monitoring solution
+Deploys link:https://www.instana.com/[Instana], a cloud monitoring solution. This recipe use a manual installation. Instana provides link:https://www.instana.com/docs/setup_and_manage/host_agent/on[other solutions] like helm or Operator.
+The manual is selected to get further modification possibilities (overwriting and setting environment assignments)
 
 |===
-| Title | Instana
+| Title | Instana (manual)
 | Status | In testing 
 | Deploy Model | kustomize
 | Dependencies | n/a
