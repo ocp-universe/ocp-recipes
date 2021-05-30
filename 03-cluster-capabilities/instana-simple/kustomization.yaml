@@ -10,6 +10,7 @@ kind: Kustomization
 
 
 resources:
+- 001-rbac.yaml
 - 000-instana-agent.yaml
 
 patchesStrategicMerge:
