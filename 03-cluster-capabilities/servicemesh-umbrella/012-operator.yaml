@@ -19,6 +19,7 @@ spec:
   name: servicemeshoperator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: servicemeshoperator.v2.0.3
+  #startingCSV: servicemeshoperator.v2.0.3
+  startingCSV: servicemeshoperator.v2.0.5.1
 ---
 
