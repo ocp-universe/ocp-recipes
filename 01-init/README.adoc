@@ -42,6 +42,104 @@ subscription.operators.coreos.com/openshift-gitops-operator unchanged
 
 Wait for that ArgoCD to be installed. The installation process also deploys an ArgoCD Application which links the link:../02-cluster-config[Cluster Config]. 
 
+== Enhancements
+
+=== ArgoCD with Vault Plugin
+
+
+----
+oc new-app --name argo-vault https://github.com/ocp-universe/ocp-recipes --context-dir=01-init/argocd-vault --strategy=Docker 
+----
+
+[source,yaml]
+----
+        initContainers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: download-tools
+          command:
+            - sh
+            - '-c'
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: custom-tools
+              mountPath: /custom-tools
+          terminationMessagePolicy: File
+          image: 'alpine:3.8'
+          args:
+            - >-
+              echo "downloading..." && 
+              wget -O /custom-tools/argocd-vault-plugin https://github.com/IBM/argocd-vault-plugin/releases/download/v1.0.0/argocd-vault-plugin_1.0.0_linux_amd64 &&
+
+              chmod +x /custom-tools/argocd-vault-plugin 
+        schedulerName: default-scheduler
+        terminationGracePeriodSeconds: 30
+        securityContext: {}
+        containers:
+            - resources: {}
+            readinessProbe:
+                tcpSocket:
+                port: 8081
+                initialDelaySeconds: 5
+                timeoutSeconds: 1
+                periodSeconds: 10
+                successThreshold: 1
+                failureThreshold: 3
+            terminationMessagePath: /dev/termination-log
+            name: argocd-repo-server
+            command:
+                - uid_entrypoint.sh
+                - argocd-repo-server
+                - '--redis'
+                - 'argocd3-redis.openshift-gitops.svc.cluster.local:6379'
+            livenessProbe:
+                tcpSocket:
+                port: 8081
+                initialDelaySeconds: 5
+                timeoutSeconds: 1
+                periodSeconds: 10
+                successThreshold: 1
+                failureThreshold: 3
+            ports:
+                - name: server
+                containerPort: 8081
+                protocol: TCP
+                - name: metrics
+                containerPort: 8084
+                protocol: TCP
+            imagePullPolicy: Always
+            volumeMounts:
+                - name: ssh-known-hosts
+                mountPath: /app/config/ssh
+                - name: tls-certs
+                mountPath: /app/config/tls
+                - name: gpg-keyring
+                mountPath: /app/config/gpg/keys
+                - name: custom-tools
+                mountPath: /usr/local/bin/argocd-vault-plugin
+                subPath: argocd-vault-plugin
+            terminationMessagePolicy: File
+            image: >-
+                registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:1da88dd045197f3a64c9508e290fd64f23dc0648bc304f6416e952d9404bee57
+        automountServiceAccountToken: false
+        volumes:
+            - name: ssh-known-hosts
+            configMap:
+                name: argocd-ssh-known-hosts-cm
+                defaultMode: 420
+            - name: tls-certs
+            configMap:
+                name: argocd-tls-certs-cm
+                defaultMode: 420
+            - name: gpg-keyring
+            emptyDir: {}
+            - name: custom-tools
+            emptyDir: {}
+        dnsPolicy: ClusterFirst
+----
+
+
+
 == Summary
 
 This is the foundation for the GitOps solution to manage a Kubernetes/OpenShift cluster using Argo CD.
