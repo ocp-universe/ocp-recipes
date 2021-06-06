@@ -1,0 +1,128 @@
+[
+  {
+    "name": "sealedsecret",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/sealedsecret",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "tekton-common-manifest",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/tekton-common-tasks/helm",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "rhacm-simple",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/rhacm-simple",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "rh-oadp",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/oadp",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "instana-agent",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/instana-simple",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "rh-servicemesh",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/servicemesh-umbrella",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "project-management",
+    "repo": "https://github.com/ocp-universe/ocp-recipes",
+    "path": "03-cluster-capabilities/project-gov",
+    "revision": "main",
+    "namespace": "openshift-gitops",
+    "project": "argocd-bootstrap-project",
+    "ignores": [
+      {
+        "group": "tekton.dev",
+        "kind": "TaskRun",
+        "jsonPointers": [
+          "/metadata/labels",
+          "/metadata/annotations"
+        ]
+      }
+    ]
+  }
+]
