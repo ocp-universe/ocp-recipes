@@ -1,7 +1,4 @@
-# OpenShift Operator
-# 
-# elasticsearch-operator
-# Version: 4.6.x, channel: 4.6
+# ApplicationSet to install the depending operators
 #
 ---
 apiVersion: argoproj.io/v1alpha1
