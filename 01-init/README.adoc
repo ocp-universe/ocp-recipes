@@ -11,12 +11,21 @@ toc::[]
 
 == Overview
 
-This section contains the initialization part. It installs OpenShift GitOps with Argo CD and Tekton.
+This section contains the initialization part. It installs OpenShift GitOps with Argo CD. Newer version does not contains Tekton/OpenShift Pipelines anymore. Separat installation is needed and covered with the here provided configuration.
 
 The first version of this solution used the ArgoCD link:https://argoproj.github.io/argo-cd/operator-manual/cluster-bootstrapping/[App of Apps pattern] to bootstrap and manage the dynamic list of applications.
 
 The latest version use the new feature base on link:https://argocd-applicationset.readthedocs.io/en/stable/[ArgoCD ApplicationSet]. `ApplicationSet` generates `Application` resources using configuration from a static list or git repository.
 
+.OpenShift GitOps
+* v1.1.2
+** ArgoCD 2.0.0
+
+.OpenShift Pipeline
+* v1.4.1 
+** Tekton Pipelines: v0.22.0
+** Tekton Triggers: v0.12.1
+** ClusterTasks based on Tekton Catalog 0.22
 
 == Installation
 
@@ -37,107 +46,18 @@ $ oc apply -k 01-init/kustomize
 namespace/openshift-gitops unchanged
 appproject.argoproj.io/argocd-bootstrap-project created
 applicationset.argoproj.io/argocd-bootstrap-set created
-subscription.operators.coreos.com/openshift-gitops-operator unchanged
+subscription.operators.coreos.com/openshift-gitops-operator created
+subscription.operators.coreos.com/openshift-pipelines-operator-rh created
 ----
 
 Wait for that ArgoCD to be installed. The installation process also deploys an ArgoCD Application which links the link:../02-cluster-config[Cluster Config]. 
+Depends on the Cluster-Config you will have no or the first capabilities as ArgoCD Applications configured and initialized.
 
 == Enhancements
 
 === ArgoCD with Vault Plugin
 
-
-----
-oc new-app --name argo-vault https://github.com/ocp-universe/ocp-recipes --context-dir=01-init/argocd-vault --strategy=Docker 
-----
-
-[source,yaml]
-----
-        initContainers:
-        - resources: {}
-          terminationMessagePath: /dev/termination-log
-          name: download-tools
-          command:
-            - sh
-            - '-c'
-          imagePullPolicy: IfNotPresent
-          volumeMounts:
-            - name: custom-tools
-              mountPath: /custom-tools
-          terminationMessagePolicy: File
-          image: 'alpine:3.8'
-          args:
-            - >-
-              echo "downloading..." && 
-              wget -O /custom-tools/argocd-vault-plugin https://github.com/IBM/argocd-vault-plugin/releases/download/v1.0.0/argocd-vault-plugin_1.0.0_linux_amd64 &&
-
-              chmod +x /custom-tools/argocd-vault-plugin 
-        schedulerName: default-scheduler
-        terminationGracePeriodSeconds: 30
-        securityContext: {}
-        containers:
-            - resources: {}
-            readinessProbe:
-                tcpSocket:
-                port: 8081
-                initialDelaySeconds: 5
-                timeoutSeconds: 1
-                periodSeconds: 10
-                successThreshold: 1
-                failureThreshold: 3
-            terminationMessagePath: /dev/termination-log
-            name: argocd-repo-server
-            command:
-                - uid_entrypoint.sh
-                - argocd-repo-server
-                - '--redis'
-                - 'argocd3-redis.openshift-gitops.svc.cluster.local:6379'
-            livenessProbe:
-                tcpSocket:
-                port: 8081
-                initialDelaySeconds: 5
-                timeoutSeconds: 1
-                periodSeconds: 10
-                successThreshold: 1
-                failureThreshold: 3
-            ports:
-                - name: server
-                containerPort: 8081
-                protocol: TCP
-                - name: metrics
-                containerPort: 8084
-                protocol: TCP
-            imagePullPolicy: Always
-            volumeMounts:
-                - name: ssh-known-hosts
-                mountPath: /app/config/ssh
-                - name: tls-certs
-                mountPath: /app/config/tls
-                - name: gpg-keyring
-                mountPath: /app/config/gpg/keys
-                - name: custom-tools
-                mountPath: /usr/local/bin/argocd-vault-plugin
-                subPath: argocd-vault-plugin
-            terminationMessagePolicy: File
-            image: >-
-                registry.redhat.io/openshift-gitops-1/argocd-rhel8@sha256:1da88dd045197f3a64c9508e290fd64f23dc0648bc304f6416e952d9404bee57
-        automountServiceAccountToken: false
-        volumes:
-            - name: ssh-known-hosts
-            configMap:
-                name: argocd-ssh-known-hosts-cm
-                defaultMode: 420
-            - name: tls-certs
-            configMap:
-                name: argocd-tls-certs-cm
-                defaultMode: 420
-            - name: gpg-keyring
-            emptyDir: {}
-            - name: custom-tools
-            emptyDir: {}
-        dnsPolicy: ClusterFirst
-----
-
+in preparation
 
 
 == Summary
