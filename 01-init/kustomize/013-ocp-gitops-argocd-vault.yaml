@@ -1,0 +1,103 @@
+# ArgoCD configuration WITH Vault
+#
+# - Enable Server Route
+# - Enable OAuth
+# - Enable Status Badge
+# - Enable Grafana with Route
+# - Enable Prometheus with Route
+# - Register repos and credentials
+# - Enhance health check for Ingress
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: argocd-test
+  namespace: openshift-gitops
+  labels:
+    workspace: test
+spec:
+#  image: 'image-registry.openshift-image-registry.svc:5000/openshift-gitops/argocd-vault:latest'
+#  image: 'image-registry.openshift-image-registry.svc:5000/openshift-gitops/argo-vault@sha256:4fb0371c9e7d6f87f936ae8ec374347c327b501daf33aefd2a31c7b7f9ec007c'
+#  image: openshift-gitops/argo-vault:latest
+#  image: image-registry.openshift-image-registry.svc:5000/openshift-gitops/argo-vault:latest
+#  image: argo-vault:latest
+  image: 'image-registry.openshift-image-registry.svc:5000/openshift-gitops/argocd-vault-special:v1'
+  controller:
+    # Change app-resync, default is 3min
+    appSync: 1m
+  statusBadgeEnabled: true
+  server:
+    route:
+      enabled: true
+#  dex:
+#    image: quay.io/redhat-cop/dex
+#    openShiftOAuth: true
+#    version: v2.22.0-openshift
+#  dex:
+#    openShiftOAuth: true
+  rbac:
+    #defaultPolicy: 'role:readonly'
+    policy: |
+      g, system:cluster-admins, role:admin
+    scopes: '[groups]'
+  grafana:
+    enabled: false
+    image: grafana/grafana
+    ingress:
+      enabled: false
+    resources: {}
+    route: 
+      enabled: true
+    size: 1
+#    version: 6.7.1
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route: 
+      enabled: true
+    size: 1
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - PipelineRun
+#  repositoryCredentials: '*'
+  # Enhance health check for Ingress and PVC
+  resourceCustomizations: |
+    extensions/Ingress:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+    networking.k8s.io/Ingress:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+    PersistentVolumeClaim:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          return hs
+    bitnami.com/SealedSecret:
+        health.lua: |
+          hs = {}
+          hs.status = "Healthy"
+          hs.message = "Controller doesn't report resource status"
+          return hs
+  configManagementPlugins: |
+    - name: argocd-vault-plugin
+      generate:
+        command: ["argocd-vault-plugin"]
+        args: ["generate", "./"]
+    - name: argocd-vault-plugin-helm
+      generate:
+        command: ["sh", "-c"]
+        args: ["helm template . > all.yaml && argocd-vault-plugin generate all.yaml"]
+    - name: argocd-vault-plugin-kustomize
+      generate:
+        command: ["sh", "-c"]
+        args: ["kustomize build . > all.yaml && argocd-vault-plugin generate all.yaml"]
