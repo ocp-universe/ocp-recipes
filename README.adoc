@@ -33,6 +33,98 @@ To prepare your (new) cluster follow only the 2 steps:
 . Configure the `cluster-config.json` in link:02-cluster-config[Cluster Config] to select the desired state (and capabilities). Some capability examples are in link:03-cluster-capabilities[Cluster Capabilities], any other repository is how ever possible.
 . Apply the init as stated in the instruction in link:01-init[Init] to install the foundation (ArgoCD and the bootstrap config).
 
+== Known Issues
+
+=== ArgoCD and Waves
+
+Some capabilities use ArgoCD wave logic to define the order. Since ArgoCD 1.8 this results in some issues if wave and specific resources like `Namespaces` are used. See for details link:https://github.com/argoproj/argo-cd/issues/3781[issue] and link:https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/health.md#argocd-app[docu].
+
+
+[source,yaml]
+.Adjust the existing `argocd-cm`
+----
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: openshift-gitops
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  resource.customizations: |
+    argoproj.io/Application:
+      health.lua: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.health ~= nil then
+            hs.status = obj.status.health.status
+            if obj.status.health.message ~= nil then
+              hs.message = obj.status.health.message
+            end
+          end
+        end
+        return hs
+----
+
+.Or the `ArgoCD` instance
+----
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: openshift-gitops  
+spec:
+  # ...
+  resourceCustomizations: |
+    argoproj.io/Application:
+      health.lua: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.health ~= nil then
+            hs.status = obj.status.health.status
+            if obj.status.health.message ~= nil then
+              hs.message = obj.status.health.message
+            end
+          end
+        end
+        return hs
+----
+
+.Or create a new with the `argocd-cm` annotation
+----
+$ cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-argocd-cm
+  namespace: openshift-gitops
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  resource.customizations: |
+    argoproj.io/Application:
+      health.lua: |
+        hs = {}
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.health ~= nil then
+            hs.status = obj.status.health.status
+            if obj.status.health.message ~= nil then
+              hs.message = obj.status.health.message
+            end
+          end
+        end
+        return hs
+EOF
+----
+
 == Summary
 
 GitOps approach also for maintaining Kubernetes Clusters. Reusability. Idempotent results.
