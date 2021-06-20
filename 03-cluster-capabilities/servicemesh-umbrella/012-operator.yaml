@@ -11,8 +11,8 @@ metadata:
   namespace: openshift-operators
   labels:
     operators.coreos.com/elasticsearch-operator.openshift-operators-redhat: ""
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
+  #annotations:
+  #  argocd.argoproj.io/sync-wave: "2"
 spec:
   channel: stable
   installPlanApproval: Automatic
