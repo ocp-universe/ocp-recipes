@@ -17,4 +17,4 @@ resources:
 - 011-namespace.yaml
 - 012-operator.yaml
 - 021-rbac.yaml
-#- 030-instances.yaml
+- 030-instances.yaml

@@ -6,8 +6,8 @@ kind: ServiceMeshControlPlane
 metadata:
   name: basic
   namespace: istio-system
-  annotations:
-    argocd.argoproj.io/sync-wave: "6"
+  #annotations:
+  #  argocd.argoproj.io/sync-wave: "6"
 spec:
   version: v2.0
   tracing:
