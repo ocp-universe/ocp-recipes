@@ -1,0 +1,16 @@
+# IBM Cloud Operator
+# https://github.com/IBM/cloud-operators
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibmcloud-operator
+  namespace: openshift-operators 
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: ibmcloud-operator
+  source: community-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: ibmcloud-operator.v1.0.0
+---
