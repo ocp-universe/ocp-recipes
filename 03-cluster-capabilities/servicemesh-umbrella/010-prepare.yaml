@@ -4,7 +4,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: servicemesh-umbrella
+  name: servicemesh-pre-components
   namespace: openshift-gitops
   annotations:
     #argocd.argoproj.io/hook: PreSync
