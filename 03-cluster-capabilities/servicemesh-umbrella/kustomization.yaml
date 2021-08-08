@@ -15,6 +15,6 @@ resources:
 #- kiali/overlays/ocp-4.7/kustomization.yaml
 - 010-prepare.yaml
 - 011-namespace.yaml
-#- 012-operator.yaml
+- 012-operator.yaml
 #- 021-rbac.yaml
 #- 030-instances.yaml
