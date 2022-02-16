@@ -1,0 +1,55 @@
+= OpenShift Recipes: External Secrets Operator (ESO)
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+External Secrets Operator (ESO), with Kustomize
+
+toc::[]
+
+== Overview
+
+Deploys link:https://github.com/external-secrets/external-secrets/[ESO], a possibility to retrieve secrets from a (remote) Secrets Management instance, like IBM Cloud Secrets Manager or AWS Secrets Manager. 
+
+|===
+| Title | External Secrets Operator
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.8
+|===
+
+== Preparation
+
+N/A
+
+== Post action
+
+Follow the link:https://external-secrets.io/[documentation] for details.
+Mandatory is the configuration of a link:https://external-secrets.io/v0.4.2/guides-getting-started/#create-your-first-secretstore[SecretStore] holding the information (URL, API-Key) to interact with the remote Secrets Manager. With the sensitive data (API-Key) is it necessary to do this afterwards.
+
+== Summary
+
+Recipe installed.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

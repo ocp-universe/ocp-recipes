@@ -1,0 +1,41 @@
+# Extern Secrets Operator configuration
+# ...triggers creation of an instance, using internally helm
+---
+apiVersion: operator.external-secrets.io/v1alpha1
+kind: OperatorConfig
+metadata:
+  name: external-secrets-config
+  namespace: openshift-operators
+spec:
+  affinity: {}
+  extraArgs: {}
+  extraEnv: []
+  fullnameOverride: ''
+  image:
+    pullPolicy: IfNotPresent
+    repository: ghcr.io/external-secrets/external-secrets
+    tag: ''
+  imagePullSecrets: []
+  installCRDs: false
+  leaderElect: false
+  nameOverride: ''
+  nodeSelector: {}
+  podAnnotations: {}
+  podLabels: {}
+  podSecurityContext: {}
+  priorityClassName: ''
+  prometheus:
+    enabled: false
+    service:
+      port: 8080
+  rbac:
+    create: true
+  replicaCount: 1
+  resources: {}
+  scopedNamespace: ''
+  securityContext: {}
+  serviceAccount:
+    annotations: {}
+    create: true
+    name: ''
+  tolerations: []
