@@ -35,6 +35,7 @@ This recipes installs
 == Preparation
 
 * link:https://github.com/ocp-universe/ocp-recipes/tree/main/03-cluster-capabilities/external-secrets-operator[`external-secrets-operator`]
+* if ArgoCD used, `kustomizeBuildOptions: '--enable-helm'` in `ArgoCD` resource
 
 == Post action
 
