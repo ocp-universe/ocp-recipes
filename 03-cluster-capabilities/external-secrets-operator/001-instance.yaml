@@ -6,6 +6,8 @@ kind: OperatorConfig
 metadata:
   name: external-secrets-config
   namespace: openshift-operators
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
 spec:
   affinity: {}
   extraArgs: {}
