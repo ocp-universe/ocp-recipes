@@ -21,7 +21,9 @@ helmCharts:
       existingSecretPasswordKey: pw
       postgresqlUsername: ibm_cloud_a4e7ec7d_596d_4ca6_b20c_bbae2f7d9a9e
       postgresqlDatabase: ibmclouddb
-      postgresqlServer: "c7d48f88-5c94-4249-9358-eea3a3f3cbec.c3jgsjqf0prn36465j00.databases.appdomain.cloud:31876"
+      postgresqlServer: "c7d48f88-5c94-4249-9358-eea3a3f3cbec.c3jgsjqf0prn36465j00.databases.appdomain.cloud"
+      service:
+        port: 31876
 
 resources:
 - 000-ns.yaml
