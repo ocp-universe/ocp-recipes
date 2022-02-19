@@ -11,5 +11,6 @@ kind: Kustomization
 
 resources:
 - 000-operator.yaml
+- 001-rbac.yaml
 - 001-instance.yaml
 

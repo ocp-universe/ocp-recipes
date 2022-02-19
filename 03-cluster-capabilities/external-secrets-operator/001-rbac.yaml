@@ -1,0 +1,34 @@
+# RBAC
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: "external-secrets-role"
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-51"
+rules:
+# General read/patch
+- apiGroups:
+  - operator.external-secrets.io
+  resources:
+  - operatorconfigs
+  verbs: ["*"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: external-secrets-binding
+  namespace: openshift-operators
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: external-secrets-role
+subjects:
+- kind: ServiceAccount
+  name: openshift-gitops-argocd-application-controller
+  namespace: openshift-gitops
+---
