@@ -1,0 +1,116 @@
+
+## Is this deployment for OpenShift? If so, we help with SCCs
+OpenShift:
+  enabled: true
+  createSCC: true
+
+image:
+  repository: sonarqube
+  tag: 8.9-community
+  pullPolicy: IfNotPresent
+  # If using a private repository, the name of the imagePullSecret to use
+  # pullSecret: my-repo-secret
+
+## Configuration values for postgresql dependency
+## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
+postgresql:
+  # Enable to deploy the PostgreSQL chart
+  enabled: false
+  # To use an external PostgreSQL instance, set enabled to false and uncomment
+  # the line below:
+  postgresqlServer: "c7d48f88-5c94-4249-9358-eea3a3f3cbec.c3jgsjqf0prn36465j00.databases.appdomain.cloud:31876"
+  # To use an external secret for the password for an external PostgreSQL
+  # instance, set enabled to false and provide the name of the secret on the
+  # line below:
+  existingSecret: "sonarqube-db-secret"
+  existingSecretPasswordKey: "pw"
+  postgresqlUsername: "ibm_cloud_a4e7ec7d_596d_4ca6_b20c_bbae2f7d9a9e"
+  #postgresqlPassword: "sonarPass"
+  postgresqlDatabase: "ibmclouddb"
+  # Specify the TCP port that PostgreSQL should use
+  service:
+    port: 5432
+  resources:
+    limits:
+      cpu: 2
+      memory: 2Gi
+    requests:
+      cpu: 100m
+      memory: 200Mi
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 20Gi
+    storageClass:
+  securityContext:
+    # For standard Kubernetes deployment, set enabled=true
+    # If using OpenShift, enabled=false for restricted SCC and enabled=true for anyuid/nonroot SCC
+    enabled: false
+    # fsGroup and runAsUser specifications below are not applied if enabled=false. enabled=false is the required setting for OpenShift "restricted SCC" to work successfully.
+    # postgresql dockerfile sets user as 1001
+    fsGroup: 1001
+    runAsUser: 1001
+  volumePermissions:
+    # For standard Kubernetes deployment, set enabled=false
+    # For OpenShift, set enabled=true and ensure to set volumepermissions.securitycontext.runAsUser below.
+    enabled: true
+    # if using restricted SCC set runAsUser: "auto" and if running under anyuid/nonroot SCC - runAsUser needs to match runAsUser above
+    securityContext:
+      runAsUser: "auto"
+  shmVolume:
+    chmod:
+      enabled: false
+  serviceAccount:
+    ## If enabled = true, and name is not set, postgreSQL will create a serviceAccount
+    enabled: false
+#    name:
+
+# Additional labels to add to the pods:
+# podLabels:
+#   key: value
+podLabels: {}
+# For compatibility with 8.0 replace by "/opt/sq"
+# For compatibility with 8.2, leave the default. They changed it back to /opt/sonarqube
+sonarqubeFolder: /opt/sonarqube
+
+tests:
+  enabled: true
+  # image: bitnami/minideb-extras
+
+# For OpenShift set create=true to ensure service account is created.
+serviceAccount:
+  create: true
+  # name:
+  ## Annotations for the Service Account
+  annotations: {}
+
+# extraConfig is used to load Environment Variables from Secrets and ConfigMaps
+# which may have been written by other tools, such as external orchestrators.
+#
+# These Secrets/ConfigMaps are expected to contain Key/Value pairs, such as:
+#
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: external-sonarqube-opts
+# data:
+#   SONARQUBE_JDBC_USERNAME: foo
+#   SONARQUBE_JDBC_URL: jdbc:postgresql://db.example.com:5432/sonar
+#
+# These vars can then be injected into the environment by uncommenting the following:
+#
+# extraConfig:
+#   configmaps:
+#     - external-sonarqube-opts
+
+extraConfig:
+  secrets: []
+  configmaps: []
+
+# account:
+#   adminPassword: admin
+#   currentAdminPassword: admin
+# curlContainerImage: curlimages/curl:latest
+# adminJobAnnotations: {}
+
+terminationGracePeriodSeconds: 60

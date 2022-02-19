@@ -1,0 +1,28 @@
+# Kustomize: Operator
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+#namespace: openshift-gitops
+#commonLabels:
+#  pipeline: tekton101
+#  deploy: argocd
+
+helmCharts:
+- name: helm-chart-sonarqube
+  #repo: https://github.com/stocktrader-ops/helm-chart-sonarqube//charts/sonarqube?ref=sonarqube-9.6.3
+  version: 9.6.3
+  releaseName: sonarqube
+  namespace: sonarqube
+  valuesInline:
+    postgresql:
+      enabled: false
+      existingSecret: sonarqube-db-secret
+      existingSecretPasswordKey: pw
+      postgresqlUsername: ibm_cloud_a4e7ec7d_596d_4ca6_b20c_bbae2f7d9a9e
+      postgresqlDatabase: ibmclouddb
+      postgresqlServer: "c7d48f88-5c94-4249-9358-eea3a3f3cbec.c3jgsjqf0prn36465j00.databases.appdomain.cloud:31876"
+
+resources:
+- 000-ns.yaml
+- 001-secret.yaml

@@ -1,0 +1,10 @@
+# Namespace
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+  labels:
+    kubernetes.io/metadata.name: sonarqube
+  name: sonarqube

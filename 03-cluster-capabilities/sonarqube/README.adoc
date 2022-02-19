@@ -1,0 +1,65 @@
+= OpenShift Recipes: SonarQube
+:author: Hafid Haddouti
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+SonarQube, with Kustomize
+
+toc::[]
+
+== Overview
+
+Deploys link:https://github.com/SonarSource/helm-chart-sonarqube[SonarQube], with some modifications for running on OpenShift. 
+
+|===
+| Title | SonarQube
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.8
+|===
+
+Base chart definitions are from
+
+* link:https://github.com/SonarSource/helm-chart-sonarqube[SonarQube]
+* and link:https://github.com/stocktrader-ops/helm-chart-sonarqube[Stockrader Ops]
+
+This recipes installs
+
+* namespace `sonarqube`
+* the helm chart using `helm-chart-sonarqube`
+* retrieve PostgreSQL password with help of `external-secrets-operator` (which should be already in cluster)
+
+== Preparation
+
+* link:https://github.com/ocp-universe/ocp-recipes/tree/main/03-cluster-capabilities/external-secrets-operator[`external-secrets-operator`]
+
+== Post action
+
+Configure the PostgreSQL access.
+
+== Summary
+
+Recipe installed.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.
