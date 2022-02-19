@@ -25,7 +25,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "-50"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: external-secrets-role
 subjects:
 - kind: ServiceAccount
