@@ -30,6 +30,69 @@ N/A
 Follow the link:https://external-secrets.io/[documentation] for details.
 Mandatory is the configuration of a link:https://external-secrets.io/v0.4.2/guides-getting-started/#create-your-first-secretstore[SecretStore] holding the information (URL, API-Key) to interact with the remote Secrets Manager. With the sensitive data (API-Key) is it necessary to do this afterwards.
 
+For IBM Cloud Secrets Manager use the following commands to
+
+* create an API Key
+* set the permissions to (only) read secrets
+* determine the URL of the Secrets Manager instance
+
+Afterwards generates a `Secret` holding the API Key and `ClusterSecretStore` using it.
+
+[source,shell]
+----
+export SM_NAME="devops-secretsmanager-demo"
+echo "ServiceID..."
+export SERVICE_ID=`ibmcloud iam service-id kubernetes-secrets-demo --output json | jq -r ".[].id"`
+if [ -z "${SERVICE_ID}" ]; then
+    export SERVICE_ID=`ibmcloud iam service-id-create kubernetes-secrets-demo --description "A service ID for testing Secrets Manager and Kubernetes Service." --output json | jq -r ".id"`; echo "ServiceID: $SERVICE_ID"
+    ibmcloud iam service-policy-create $SERVICE_ID --roles "SecretsReader" --service-name secrets-manager
+else 
+    echo "...found: ServiceID: $SERVICE_ID"
+fi
+
+echo "API Key..."
+export IBM_CLOUD_API_KEY=`ibmcloud iam service-api-key-create kubernetes-secrets-demo $SERVICE_ID --description "An API key for testing Secrets Manager." --output json | jq -r ".apikey"`
+
+# Prepare Secrets Manager with secret group and dummy secret
+echo "SecretsManagerUrl..."
+export SECRETS_MANAGER_URL=`ibmcloud resource service-instance $SM_NAME --output json | jq -r '.[].dashboard_url | .[0:-3]'`; echo "SecretsManagerUrl: $SECRETS_MANAGER_URL"
+
+echo $IBM_CLOUD_API_KEY
+echo $SECRETS_MANAGER_URL
+----
+
+.`internal.prep.yaml`
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ibm-secretsmanager-apikey
+  namespace: devops-common
+stringData:
+  apiKey: $IBM_CLOUD_API_KEY
+--- 
+apiVersion: external-secrets.io/v1alpha1
+kind: ClusterSecretStore
+metadata:
+  name: secretstore-ibm-secretsmanager
+  namespace: openshift-operators
+spec:
+  provider:
+    ibm:
+      serviceUrl: "$SECRETS_MANAGER_URL"
+      auth:
+        secretRef:
+          secretApiKeySecretRef:
+            name: ibm-secretsmanager-apikey
+            key: apiKey
+            namespace: devops-common
+----
+
+----
+cat internal.prep.yaml > envsubst | oc apply -f -
+----
+
 == Summary
 
 Recipe installed.

@@ -14,5 +14,5 @@ spec:
   name: external-secrets-operator
   source: community-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: external-secrets-operator.v0.4.1
+  #startingCSV: external-secrets-operator.v0.4.1
 ---
