@@ -23,11 +23,30 @@ Deploys an ArgoCD App with some specific ArgoCD features
 
 == Preparation
 
-* if ArgoCD used, `kustomizeBuildOptions: '--enable-helm'` in `ArgoCD` resource
+* for ArgoCD, `kustomizeBuildOptions: '--enable-helm'` in `ArgoCD` resource
 
-== Post action
+== Details
 
-tbd
+=== ArgoCD Waves and Hooks
+
+ArgoCD provides with waves and hook the possibility to influence the order
+
+image:static/argocd.png[]
+
+[source,yaml]
+----
+  annotations:
+    # PreSync, Sync, PostSync, FailSync, Skip
+    argocd.argoproj.io/hook: PostSync
+    # HookSucceeded, HookFailed, BeforeHookCreation (default)
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: "1"
+----
+
+The special hooks
+
+* `SyncFail` in case the sync operation fails; to execute clean-up and finalizers
+* `Skip` indicates to skip this resource manifest
 
 == Summary
 
