@@ -1,0 +1,8 @@
+
+dummy: value
+
+
+serviceAccount:
+  annotations:
+    team: "devops"
+    chart: "helm-demo"

@@ -1,0 +1,54 @@
+= OpenShift Recipes: ArgoCD Demo
+:toc: macro
+:toclevels: 4
+:sectlinks:
+:sectanchors:
+
+Demo to showcase some features in ArgoCD
+
+toc::[]
+
+== Overview
+
+Deploys an ArgoCD App with some specific ArgoCD features
+
+|===
+| Title | ArgoCD Demo
+| Status | In testing 
+| Deploy Model | kustomize
+| Dependencies | n/a
+| OCP Version | >= 4.8
+|===
+
+
+== Preparation
+
+* if ArgoCD used, `kustomizeBuildOptions: '--enable-helm'` in `ArgoCD` resource
+
+== Post action
+
+tbd
+
+== Summary
+
+Recipe installed.
+
+== References
+
+N/A
+
+== Open
+
+N/A
+
+
+== License
+
+This article is licensed under the Apache License, Version 2.
+Separate third-party code objects invoked within this code pattern are licensed by their respective providers pursuant
+to their own separate licenses. Contributions are subject to the
+link:https://developercertificate.org/[Developer Certificate of Origin, Version 1.1] and the
+link:https://www.apache.org/licenses/LICENSE-2.0.txt[Apache License, Version 2].
+
+See also link:https://www.apache.org/foundation/license-faq.html#WhatDoesItMEAN[Apache License FAQ]
+.

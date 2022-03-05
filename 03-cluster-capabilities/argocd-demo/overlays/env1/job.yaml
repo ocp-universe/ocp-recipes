@@ -1,0 +1,19 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "job-env1"
+  labels:
+    name: "job-env1"
+spec:
+  template:
+    metadata:
+      name: "job-env1"
+      labels:
+        name: "job-env1"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job-env1-container
+        image: "alpine:3.3"
+        command: ["/bin/sleep","30"]
