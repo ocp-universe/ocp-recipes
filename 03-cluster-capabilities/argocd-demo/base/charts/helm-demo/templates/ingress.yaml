@@ -1,0 +1,20 @@
+---
+# Source: quarkus-playground/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app1-ingress
+  labels:
+    app: app1
+spec:
+  rules:
+    - host: "app1"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app1-svc
+                port:
+                  number: 8080
