@@ -8,16 +8,16 @@ kind: Kustomization
 #  pipeline: tekton101
 #  deploy: argocd
 
-configMapGenerator:
-- behavior: merge
-  name: argocd-cm
-  namespace: openshift-gitops
-  literals:
-  - |
-    resource.customizations.health.operator.external-secrets.io_OperatorConfig: |
-      hs = {}
-      hs.status = "Healthy"
-      return hs
+#configMapGenerator:
+#- behavior: merge
+#  name: argocd-cm
+#  namespace: openshift-gitops
+#  literals:
+#  - |
+#    resource.customizations.health.operator.external-secrets.io_OperatorConfig: |
+#      hs = {}
+#      hs.status = "Healthy"
+#      return hs
 
 
 
