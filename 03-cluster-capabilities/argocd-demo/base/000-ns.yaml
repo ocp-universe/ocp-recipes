@@ -7,4 +7,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "-10"
   labels:
     kubernetes.io/metadata.name: argocd-demo
+    argocd.argoproj.io/managed-by: openshift-gitops
   name: argocd-demo
