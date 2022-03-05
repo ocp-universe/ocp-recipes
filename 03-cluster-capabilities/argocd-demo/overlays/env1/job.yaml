@@ -4,7 +4,7 @@ kind: Job
 metadata:
   name: "job-env1-pre-wave1"
   labels:
-    name: "job-env1"
+    name: "job-env1-pre-wave1"
   annotations:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
@@ -14,7 +14,7 @@ spec:
     metadata:
       name: "job-env1-pre-wave1"
       labels:
-        name: "job-env1"
+        name: "job-env1-pre-wave1"
     spec:
       restartPolicy: Never
       containers:
@@ -27,7 +27,7 @@ kind: Job
 metadata:
   name: "job-env1-post-wave1"
   labels:
-    name: "job-env1"
+    name: "job-env1-post-wave1"
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
@@ -37,7 +37,7 @@ spec:
     metadata:
       name: "job-env1-post-wave1"
       labels:
-        name: "job-env1"
+        name: "job-env1-post-wave1"
     spec:
       restartPolicy: Never
       containers:
@@ -50,7 +50,7 @@ kind: Job
 metadata:
   name: "job-env1-post-wave20"
   labels:
-    name: "job-env1"
+    name: "job-env1-post-wave20"
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
@@ -60,7 +60,7 @@ spec:
     metadata:
       name: "job-env1-post-wave20"
       labels:
-        name: "job-env1"
+        name: "job-env1-post-wave20"
     spec:
       restartPolicy: Never
       containers:
@@ -73,7 +73,7 @@ kind: Job
 metadata:
   name: "job-env1-skip"
   labels:
-    name: "job-env1"
+    name: "job-env1-skip"
   annotations:
     argocd.argoproj.io/hook: Skip
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
@@ -81,9 +81,9 @@ metadata:
 spec:
   template:
     metadata:
-      name: "job-env1-post-wave20"
+      name: "job-env1-skip"
       labels:
-        name: "job-env1"
+        name: "job-env1-skip"
     spec:
       restartPolicy: Never
       containers:
