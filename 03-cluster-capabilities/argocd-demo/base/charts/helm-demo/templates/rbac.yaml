@@ -1,6 +1,6 @@
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: "argocd-demo-edit-rb"
 roleRef:
