@@ -2,13 +2,86 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "job-env1"
+  name: "job-env1-pre-wave1"
   labels:
     name: "job-env1"
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   template:
     metadata:
-      name: "job-env1"
+      name: "job-env1-pre-wave1"
+      labels:
+        name: "job-env1"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job-env1-container
+        image: "alpine:3.3"
+        command: ["/bin/sleep","30"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "job-env1-post-wave1"
+  labels:
+    name: "job-env1"
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    metadata:
+      name: "job-env1-post-wave1"
+      labels:
+        name: "job-env1"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job-env1-container
+        image: "alpine:3.3"
+        command: ["/bin/sleep","30"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "job-env1-post-wave20"
+  labels:
+    name: "job-env1"
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  template:
+    metadata:
+      name: "job-env1-post-wave20"
+      labels:
+        name: "job-env1"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: job-env1-container
+        image: "alpine:3.3"
+        command: ["/bin/sleep","30"]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "job-env1-skip"
+  labels:
+    name: "job-env1"
+  annotations:
+    argocd.argoproj.io/hook: Skip
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+    argocd.argoproj.io/sync-wave: "-100"
+spec:
+  template:
+    metadata:
+      name: "job-env1-post-wave20"
       labels:
         name: "job-env1"
     spec:
