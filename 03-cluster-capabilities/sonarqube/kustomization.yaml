@@ -15,6 +15,9 @@ helmCharts:
   releaseName: sonarqube
   namespace: sonarqube
   valuesInline:
+    OpenShift:
+      enabled: true
+      createSCC: true
     postgresql:
       enabled: true
 #      existingSecret: sonarqube-db-secret
