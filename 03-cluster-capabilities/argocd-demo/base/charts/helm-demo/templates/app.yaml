@@ -31,7 +31,7 @@ spec:
     metadata:
       labels:
         app: app1    
-        {{- include "helm-demo.labels" . | nindent 4 }}   
+        {{- include "helm-demo.labels" . | nindent 8 }}   
     spec:
       # Specific sa, relevant for Vault interaction
       serviceAccountName: sa-app1
