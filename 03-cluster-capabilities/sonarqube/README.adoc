@@ -47,7 +47,7 @@ Recipe installed.
 
 == References
 
-N/A
+* OpenShift and SonarQube - link:https://medium.com/hybrid-cloud-engineering/integrating-code-inspection-in-your-openshift-pipelines-using-sonarqube-a5371ca49369[Blog]
 
 == Open
 
