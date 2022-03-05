@@ -20,7 +20,7 @@ spec:
       containers:
       - name: job-env1-container
         image: "alpine:3.3"
-        command: ["/bin/sleep","30"]
+        command: ["/bin/sleep","15"]
 ---
 apiVersion: batch/v1
 kind: Job
@@ -43,7 +43,7 @@ spec:
       containers:
       - name: job-env1-container
         image: "alpine:3.3"
-        command: ["/bin/sleep","30"]
+        command: ["/bin/sleep","15"]
 ---
 apiVersion: batch/v1
 kind: Job
@@ -66,7 +66,7 @@ spec:
       containers:
       - name: job-env1-container
         image: "alpine:3.3"
-        command: ["/bin/sleep","30"]
+        command: ["/bin/sleep","15"]
 ---
 apiVersion: batch/v1
 kind: Job
@@ -89,4 +89,4 @@ spec:
       containers:
       - name: job-env1-container
         image: "alpine:3.3"
-        command: ["/bin/sleep","30"]
+        command: ["/bin/sleep","15"]
