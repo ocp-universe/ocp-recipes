@@ -18,3 +18,7 @@ helmCharts:
 
 resources:
 - 000-ns.yaml
+- 04-tasks/task-deploy-from-source.yaml
+- 04-tasks/task-maven.yaml
+- 04-tasks/task-kaniko.yaml
+- 04-tasks/task-buildah-privileged.yaml
