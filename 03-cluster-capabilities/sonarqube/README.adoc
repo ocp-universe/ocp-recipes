@@ -39,7 +39,11 @@ This recipes installs
 
 == Post action
 
-Configure the PostgreSQL access.
+* Configure the PostgreSQL access.
+* Manage Tokens in SonarQube
+** `Security` > `Users`: `Create User`
+** afterwards for the user set a token
+** use the token for the `sonar.login` property
 
 == Summary
 
