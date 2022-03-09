@@ -93,6 +93,30 @@ spec:
 cat internal.prep.yaml > envsubst | oc apply -f -
 ----
 
+For testing the retrieval and `Secret` creation, use this template and adjust the IDs etc.
+
+[source,yaml]
+----
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: external-secret-one
+  #namespace: demo-secrets
+spec:
+  refreshInterval: 1m
+  secretStoreRef:
+    name: secretstore-ibm-secretsmanager
+    kind: ClusterSecretStore
+  target:
+    name: ibm-sm-generated
+    creationPolicy: Owner
+  data:
+  - secretKey: userid
+    remoteRef:
+      key: username_password/75a30ee2-xxxxxxxxxxxxxxx
+      property: password
+----
+
 == Summary
 
 Recipe installed.
