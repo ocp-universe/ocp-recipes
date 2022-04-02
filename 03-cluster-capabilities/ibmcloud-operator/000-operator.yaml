@@ -12,5 +12,5 @@ spec:
   name: ibmcloud-operator
   source: community-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: ibmcloud-operator.v1.0.0
+#  startingCSV: ibmcloud-operator.v1.0.0
 ---
