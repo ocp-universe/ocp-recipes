@@ -23,7 +23,32 @@ Deploys link:https://github.com/IBM/cloud-operators[IBM Cloud Operator], a possi
 
 == Preparation
 
-tbd
+N/A
+
+== Post-Action
+
+Create an IBM API Key and store it for the operator, a detailed instruction is in the repo link:https://github.com/IBM/cloud-operators#using-a-service-id[available].
+A summary consists of following steps
+
+. Create Service ID and API Key
+
+----
+ibmcloud iam service-id-create serviceid-ico -d "Service ID for IBM Cloud Operator"
+ibmcloud iam service-policy-create serviceid-ico --roles Administrator --resource-group-name default --region eu-de
+ibmcloud iam service-api-key-create apikey-ico serviceid-ico -d "API Key for IBM Cloud Operator, using Service ID" --output json | jq -r ".apikey"
+----
+
+. Create own namespace holding the `ConfigMap` and `Secret` objects for the operator
+. Create at the minimum the default `ConfigMap` and `Secret` in the new namespace
+
+----
+$ kubectl create ns devops-common
+
+$ kubectl get cm,secret -n devops-common | grep ibmcloud
+
+configmap/default-ibmcloud-operator-defaults   0      4m8s
+secret/default-ibmcloud-operator-secret   Opaque                                2      4m8s
+----
 
 == Summary
 
