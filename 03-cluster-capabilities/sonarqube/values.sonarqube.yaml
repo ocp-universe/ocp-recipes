@@ -18,7 +18,7 @@ postgresql:
   enabled: false
   # To use an external PostgreSQL instance, set enabled to false and uncomment
   # the line below:
-  postgresqlServer: "4065ed38-fbfd-4a32-8f5e-ccb955026724.c3jgsjqf0prn36465j00.databases.appdomain.cloud:31016"
+  postgresqlServer: "4065ed38-fbfd-4a32-8f5e-ccb955026724.c3jgsjqf0prn36465j00.databases.appdomain.cloud"
   # To use an external secret for the password for an external PostgreSQL
   # instance, set enabled to false and provide the name of the secret on the
   # line below:
@@ -29,7 +29,7 @@ postgresql:
   postgresqlDatabase: "ibmclouddb"
   # Specify the TCP port that PostgreSQL should use
   service:
-    port: 5432
+    port: 31016
   resources:
     limits:
       cpu: 2
