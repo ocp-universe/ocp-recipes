@@ -1,3 +1,33 @@
 # RBAC
 # 
+# system:serviceaccount:openshift-operators:service-binding-operator
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: "rh-service-binding-role"
+  annotations:
+    argocd.argoproj.io/sync-wave: "-51"
+rules:
+# General read/patch
+- apiGroups:
+  - ibmcloud.ibm.com
+  resources:
+  - bindings
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rh-service-binding-role-binding
+  namespace: openshift-operators
+  annotations:
+    argocd.argoproj.io/sync-wave: "-50"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: rh-service-binding-role
+subjects:
+- kind: ServiceAccount
+  name: service-binding-operator
+  namespace: openshift-gitops
