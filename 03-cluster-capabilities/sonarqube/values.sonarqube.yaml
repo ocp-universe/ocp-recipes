@@ -18,13 +18,13 @@ postgresql:
   enabled: false
   # To use an external PostgreSQL instance, set enabled to false and uncomment
   # the line below:
-  postgresqlServer: "c7d48f88-5c94-4249-9358-eea3a3f3cbec.c3jgsjqf0prn36465j00.databases.appdomain.cloud:31876"
+  postgresqlServer: "4065ed38-fbfd-4a32-8f5e-ccb955026724.c3jgsjqf0prn36465j00.databases.appdomain.cloud:31016"
   # To use an external secret for the password for an external PostgreSQL
   # instance, set enabled to false and provide the name of the secret on the
   # line below:
   existingSecret: "sonarqube-db-secret"
   existingSecretPasswordKey: "pw"
-  postgresqlUsername: "ibm_cloud_a4e7ec7d_596d_4ca6_b20c_bbae2f7d9a9e"
+  postgresqlUsername: "ibm_cloud_cefaa8a7_c7c8_48a5_aa5a_5f31ea796641"
   #postgresqlPassword: "sonarPass"
   postgresqlDatabase: "ibmclouddb"
   # Specify the TCP port that PostgreSQL should use

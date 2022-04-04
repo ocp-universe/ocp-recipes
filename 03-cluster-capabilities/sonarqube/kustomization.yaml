@@ -19,9 +19,9 @@ helmCharts:
       enabled: true
       createSCC: true
     postgresql:
-      enabled: true
-#      existingSecret: sonarqube-db-secret
-#      existingSecretPasswordKey: pw
+      enabled: false
+      existingSecret: sonarqube-db-secret
+      existingSecretPasswordKey: pw
 #      #postgresqlUsername: ibm_cloud_a4e7ec7d_596d_4ca6_b20c_bbae2f7d9a9e
 #      postgresqlUsername: ibm_cloud_cefaa8a7_c7c8_48a5_aa5a_5f31ea796641
 #      postgresqlDatabase: ibmclouddb
