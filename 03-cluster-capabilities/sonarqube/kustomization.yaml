@@ -14,6 +14,7 @@ helmCharts:
   version: 9.6.3
   releaseName: sonarqube
   namespace: sonarqube
+  valuesFile: values.sonarqube.yaml
   valuesInline:
     OpenShift:
       enabled: true
