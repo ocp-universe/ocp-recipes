@@ -48,7 +48,7 @@ This recipes installs
 In Kubernetes/OpenShift store the token in a secret
 
 ----
-oc create secret generic sonarqube-token-secret --from-literal= 96683f6d8cc8dd7915624efxxxxxx
+oc create secret generic sonarqube-token-secret --from-literal=token=96683f6d8cc8dd7915624efxxxxxx
 ----
 
 == Summary
