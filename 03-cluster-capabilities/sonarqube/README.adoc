@@ -45,6 +45,12 @@ This recipes installs
 ** afterwards for the user set a token
 ** use the token for the `sonar.login` property
 
+In Kubernetes/OpenShift store the token in a secret
+
+----
+oc create secret generic sonarqube-token-secret --from-literal= 96683f6d8cc8dd7915624efxxxxxx
+----
+
 == Summary
 
 Recipe installed.
