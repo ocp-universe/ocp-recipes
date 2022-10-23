@@ -1,24 +1,24 @@
-= OpenShift Recipes: OpenShift Pipelines
+= OpenShift Recipes: Compliance Operator
 :author: Hafid Haddouti
 :toc: macro
 :toclevels: 4
 :sectlinks:
 :sectanchors:
 
-OpenShift Pipelines, with Kustomize
+OpenShift Compliance Operator, with Kustomize
 
 toc::[]
 
 == Overview
 
-Deploys link:https://github.com/openshift/tektoncd-operator[OpenShift Pipelines], the Tekton solution in OpenShift. 
+Deploys link:https://github.com/openshift/compliance-operator[OpenShift Compliance Operator], to run compliance scans. 
 
 |===
-| Title | OpenShift Pipelines
+| Title | OpenShift Compliance Operator
 | Status | In testing 
 | Deploy Model | kustomize
 | Dependencies | n/a
-| OCP Version | >= 4.8
+| OCP Version | >= 4.10
 |===
 
 == Preparation
